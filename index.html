@@ -269,8 +269,8 @@ button { cursor: pointer; font-family: inherit; }
   </div>
   <div style="background:#f5f4f0;border-radius:8px;padding:10px 12px;font-size:12px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
-      <div><div style="color:#666;margin-bottom:2px;">QQQI 派息率</div><div id="m-qrate" style="font-weight:500;color:#185FA5;"></div></div>
-      <div><div style="color:#666;margin-bottom:2px;">NVDY 派息率</div><div id="m-nrate" style="font-weight:500;color:#3B6D11;"></div></div>
+      <div><div id="m-qlabel" style="color:#666;margin-bottom:2px;">QQQI 派息率</div><div id="m-qrate" style="font-weight:500;color:#185FA5;"></div></div>
+      <div><div id="m-nlabel" style="color:#666;margin-bottom:2px;">NVDY 派息率</div><div id="m-nrate" style="font-weight:500;color:#3B6D11;"></div></div>
       <div><div style="color:#666;margin-bottom:2px;">组合税前派息</div><div id="m-pre" style="font-weight:500;"></div></div>
       <div><div style="color:#666;margin-bottom:2px;">税后月均到手</div><div id="m-monthly" style="font-weight:500;color:#BA7517;"></div></div>
     </div>
@@ -443,6 +443,12 @@ function renderChart(w1,w2,w3){
 
 function renderMonthly(w1,w2,w3,capital){
   if(portfolio==='rai'){
+    document.getElementById('monthly-grid').style.gridTemplateColumns='1fr 1fr';
+    document.getElementById('col3-wrap').style.display='none';
+    document.getElementById('col1-label').textContent='QQQI TTM（13笔）'; document.getElementById('col1-label').style.color='#185FA5';
+    document.getElementById('col2-label').textContent='NVDY TTM（31笔）'; document.getElementById('col2-label').style.color='#3B6D11';
+    document.getElementById('m-qlabel').textContent='QQQI 派息率';
+    document.getElementById('m-nlabel').textContent='NVDY 派息率';
     const qTot=QQQI_TTM.reduce((a,r)=>a+r.div,0),nTot=NVDY_TTM.reduce((a,r)=>a+r.div,0);
     let qRows='';QQQI_TTM.forEach(r=>{qRows+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(3)}</td><td style="color:#BA7517">$${(r.div*w1/100).toFixed(3)}</td></tr>`;});
     qRows+=`<tr><td>合计</td><td>$${qTot.toFixed(3)}</td><td style="color:#BA7517">$${(qTot*w1/100).toFixed(3)}</td></tr>`;
@@ -457,6 +463,13 @@ function renderMonthly(w1,w2,w3,capital){
     document.getElementById('m-pre').textContent=pre+'%';
     document.getElementById('m-monthly').textContent='$'+Math.round(capital*(qTot/Q_START*(w1/100)+nTot/N_START*(w2/100))*0.7/12).toLocaleString()+'/mo';
   } else if(portfolio==='rsi'){
+    document.getElementById('monthly-grid').style.gridTemplateColumns='1fr 1fr 1fr';
+    document.getElementById('col3-wrap').style.display='';
+    document.getElementById('col1-label').textContent='SPYI TTM（13笔）'; document.getElementById('col1-label').style.color='#993C1D';
+    document.getElementById('col2-label').textContent='SCHD TTM（5笔·季付）'; document.getElementById('col2-label').style.color='#534AB7';
+    document.getElementById('col3-label').textContent='USFR TTM（12笔）'; document.getElementById('col3-label').style.color='#085041';
+    document.getElementById('m-qlabel').textContent='SPYI 派息率';
+    document.getElementById('m-nlabel').textContent='SCHD 派息率';
     const t1=SPYI_TTM.reduce((a,r)=>a+r.div,0),t2=SCHD_TTM.reduce((a,r)=>a+r.div,0),t3=USFR_TTM.reduce((a,r)=>a+r.div,0);
     let r1='';SPYI_TTM.forEach(r=>{r1+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(4)}</td><td style="color:#BA7517">$${(r.div*w1/100).toFixed(4)}</td></tr>`;});
     r1+=`<tr><td>合计</td><td>$${t1.toFixed(4)}</td><td style="color:#BA7517">$${(t1*w1/100).toFixed(4)}</td></tr>`;
@@ -474,6 +487,13 @@ function renderMonthly(w1,w2,w3,capital){
     document.getElementById('m-pre').textContent=pre+'%';
     document.getElementById('m-monthly').textContent='$'+Math.round(capital*(t1/SPYI_START*(w1/100)+t2/SCHD_START*(w2/100)+t3/USFR_START*(w3/100))*0.7/12).toLocaleString()+'/mo';
   } else {
+    document.getElementById('monthly-grid').style.gridTemplateColumns='1fr 1fr 1fr';
+    document.getElementById('col3-wrap').style.display='';
+    document.getElementById('col1-label').textContent='XLE TTM（4笔·季付）'; document.getElementById('col1-label').style.color='#854F0B';
+    document.getElementById('col2-label').textContent='AMLP TTM（4笔·季付）'; document.getElementById('col2-label').style.color='#534AB7';
+    document.getElementById('col3-label').textContent='GLD TTM（不派息）'; document.getElementById('col3-label').style.color='#999';
+    document.getElementById('m-qlabel').textContent='XLE 派息率';
+    document.getElementById('m-nlabel').textContent='AMLP 派息率';
     const t1=XLE_TTM.reduce((a,r)=>a+r.div,0),t2=AMLP_TTM.reduce((a,r)=>a+r.div,0),t3=GLD_TTM.reduce((a,r)=>a+r.div,0);
     let r1='';XLE_TTM.forEach(r=>{r1+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(6)}</td><td style="color:#BA7517">$${(r.div*w1/100).toFixed(6)}</td></tr>`;});
     r1+=`<tr><td>合计</td><td>$${t1.toFixed(6)}</td><td style="color:#BA7517">$${(t1*w1/100).toFixed(6)}</td></tr>`;
