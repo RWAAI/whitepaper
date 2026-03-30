@@ -36,8 +36,11 @@ button { cursor: pointer; font-family: inherit; }
 </head>
 <body>
 
-<h1>RWAlpha ETF 组合计算器 <span class="version-tag">v8.0 · Mar 28, 2026</span></h1>
-<div class="subtitle">rAI/rSI/rENG 数据：20260327_ETF_Historical_Data.xlsx（全品种逐笔验证）· 含 TTM 走势图 + 逐笔明细</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+  <h1 style="margin-bottom:0;">RWAlpha ETF <span data-i18n="title">组合计算器</span> <span class="version-tag">v8.0 · Mar 28, 2026</span></h1>
+  <button id="lang-btn" onclick="toggleLang()" style="display:flex;align-items:center;gap:5px;padding:5px 12px;font-size:12px;font-weight:500;border-radius:20px;border:0.5px solid #ccc;background:#fff;color:#444;cursor:pointer;white-space:nowrap;margin-top:1px;transition:all 0.15s;">🌐 <span id="lang-label">EN</span></button>
+</div>
+<div class="subtitle" data-i18n="subtitle">rAI/rSI/rENG 数据：20260327_ETF_Historical_Data.xlsx（全品种逐笔验证）· 含 TTM 走势图 + 逐笔明细</div>
 
 <div style="display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;">
   <button id="ptab-rai" onclick="setPortfolio('rai')" style="padding:8px 22px;font-size:14px;font-weight:500;border-radius:8px;border:none;background:#185FA5;color:#fff;">rAI</button>
@@ -48,97 +51,97 @@ button { cursor: pointer; font-family: inherit; }
 <!-- Product Info Cards -->
 <div id="info-rai" class="card" style="margin-bottom:14px;">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
-    <div style="font-size:15px;font-weight:500;">rAI <span style="font-size:13px;color:#666;font-weight:400;">— AI极致分红</span></div>
+    <div style="font-size:15px;font-weight:500;">rAI <span style="font-size:13px;color:#666;font-weight:400;">— <span data-i18n="rai_tagline">AI极致分红</span></span></div>
     <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#B5D4F4;color:#0C447C;">QQQI 75% · NVDY 25%</span>
-    <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#f5f4f0;color:#666;">每周分红</span>
+    <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#f5f4f0;color:#666;" data-i18n="weekly_dist">每周分红</span>
   </div>
   <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:12px;">
-    <div class="metric"><label>年化波动率</label><div class="val">18.0%</div></div>
+    <div class="metric"><label data-i18n="ann_vol">年化波动率</label><div class="val">18.0%</div></div>
     <div class="metric"><label>Sharpe Ratio</label><div class="val">0.42</div><small>Rf = 4%</small></div>
-    <div class="metric"><label>最大回撤</label><div class="val neg">−18.4%</div></div>
-    <div class="metric" style="border:1.5px solid #B5D4F4;"><label>TTM 税后净派息率</label><div id="info-rai-divrate" class="val pos">15.34%</div></div>
-    <div class="metric" style="border:1.5px solid #B5D4F4;"><label>TTM 税后总回报</label><div id="info-rai-total" class="val pos">—</div></div>
+    <div class="metric"><label data-i18n="max_dd">最大回撤</label><div class="val neg">−18.4%</div></div>
+    <div class="metric" style="border:1.5px solid #B5D4F4;"><label data-i18n="ttm_div_rate">TTM 税后净派息率</label><div id="info-rai-divrate" class="val pos">15.34%</div></div>
+    <div class="metric" style="border:1.5px solid #B5D4F4;"><label data-i18n="ttm_total_ret">TTM 税后总回报</label><div id="info-rai-total" class="val pos">—</div></div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
     <div style="font-size:12px;color:#555;line-height:1.8;">
-      <div style="font-weight:500;color:#333;margin-bottom:4px;">🎯 目标投资者</div>
-      进取型 · AI主题 · 高月度现金流需求
+      <div style="font-weight:500;color:#333;margin-bottom:4px;" data-i18n="target_investor">🎯 目标投资者</div>
+      <span data-i18n="rai_investor">进取型 · AI主题 · 高月度现金流需求</span>
     </div>
     <div style="font-size:12px;color:#555;line-height:1.8;">
-      <div style="font-weight:500;color:#333;margin-bottom:4px;">📅 分红频率</div>
-      月度分红
+      <div style="font-weight:500;color:#333;margin-bottom:4px;" data-i18n="dist_freq">📅 分红频率</div>
+      <span data-i18n="monthly_dist">月度分红</span>
     </div>
   </div>
   <div style="font-size:12px;line-height:1.9;color:#555;border-left:2px solid #378ADD;padding-left:10px;margin-bottom:8px;">
-    <span style="font-weight:500;color:#185FA5;">卖点：</span>QQQI 通过 Nasdaq-100 Covered Call 策略持续产生期权溢价，NVDY 以 NVDA 单股合成期权放大收益。两者组合实现每周多次现金流入账，TTM 税后净派息率达 <strong>18.42%</strong>，适合追求极高月度被动收入的投资者。
+    <span style="font-weight:500;color:#185FA5;" data-i18n="selling_pt">卖点：</span><span data-i18n="rai_pitch">QQQI 通过 Nasdaq-100 Covered Call 策略持续产生期权溢价，NVDY 以 NVDA 单股合成期权放大收益。两者组合实现每周多次现金流入账，TTM 税后净派息率达 <strong>18.42%</strong>，适合追求极高月度被动收入的投资者。</span>
   </div>
-  <div style="font-size:11px;color:#999;">回测期：Jan 2024 – Mar 2026（2.14年）· 税后累计总回报 +24.8% · 年化 +11.6%/yr · V19 统一 30% WHT</div>
+  <div style="font-size:11px;color:#999;" data-i18n="rai_backtest">回测期：Jan 2024 – Mar 2026（2.14年）· 税后累计总回报 +24.8% · 年化 +11.6%/yr · V19 统一 30% WHT</div>
 </div>
 
 <div id="info-rsi" class="card" style="margin-bottom:14px;display:none;">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
-    <div style="font-size:15px;font-weight:500;">rSI <span style="font-size:13px;color:#666;font-weight:400;">— 低波高分红</span></div>
+    <div style="font-size:15px;font-weight:500;">rSI <span style="font-size:13px;color:#666;font-weight:400;">— <span data-i18n="rsi_tagline">低波高分红</span></span></div>
     <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#F5C4B3;color:#712B13;">SPYI 65% · SCHD 25% · USFR 10%</span>
-    <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#f5f4f0;color:#666;">月度分红</span>
+    <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#f5f4f0;color:#666;" data-i18n="monthly_dist">月度分红</span>
   </div>
   <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:12px;">
-    <div class="metric"><label>年化波动率</label><div class="val">10.7%</div></div>
+    <div class="metric"><label data-i18n="ann_vol">年化波动率</label><div class="val">10.7%</div></div>
     <div class="metric"><label>Sharpe Ratio</label><div class="val">0.47</div><small>Rf = 4%</small></div>
-    <div class="metric"><label>最大回撤</label><div class="val neg">−12.7%</div></div>
-    <div class="metric" style="border:1.5px solid #F5C4B3;"><label>TTM 税后净派息率</label><div id="info-rsi-divrate" class="val" style="color:#993C1D;">7.11%</div></div>
-    <div class="metric" style="border:1.5px solid #F5C4B3;"><label>TTM 税后总回报</label><div id="info-rsi-total" class="val" style="color:#993C1D;">—</div></div>
+    <div class="metric"><label data-i18n="max_dd">最大回撤</label><div class="val neg">−12.7%</div></div>
+    <div class="metric" style="border:1.5px solid #F5C4B3;"><label data-i18n="ttm_div_rate">TTM 税后净派息率</label><div id="info-rsi-divrate" class="val" style="color:#993C1D;">7.11%</div></div>
+    <div class="metric" style="border:1.5px solid #F5C4B3;"><label data-i18n="ttm_total_ret">TTM 税后总回报</label><div id="info-rsi-total" class="val" style="color:#993C1D;">—</div></div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
     <div style="font-size:12px;color:#555;line-height:1.8;">
-      <div style="font-weight:500;color:#333;margin-bottom:4px;">🎯 目标投资者</div>
-      保守机构 · 家族办公室 · 稳定月度现金流
+      <div style="font-weight:500;color:#333;margin-bottom:4px;" data-i18n="target_investor">🎯 目标投资者</div>
+      <span data-i18n="rsi_investor">保守机构 · 家族办公室 · 稳定月度现金流</span>
     </div>
     <div style="font-size:12px;color:#555;line-height:1.8;">
-      <div style="font-weight:500;color:#333;margin-bottom:4px;">📅 分红频率</div>
-      月度分红
+      <div style="font-weight:500;color:#333;margin-bottom:4px;" data-i18n="dist_freq">📅 分红频率</div>
+      <span data-i18n="monthly_dist">月度分红</span>
     </div>
   </div>
   <div style="font-size:12px;line-height:1.9;color:#555;border-left:2px solid #D85A30;padding-left:10px;margin-bottom:8px;">
-    <span style="font-weight:500;color:#993C1D;">卖点：</span>三层结构设计——SPYI 提供 S&P 500 期权溢价月月落袋，SCHD 季度派息贡献质量股息，USFR 浮息国债兜底稳定性且享 PIE 免税。波动率仅 <strong>10.7%</strong>，为三产品最低，Sharpe 0.47，最大回撤 −12.7%，是机构级稳健配置首选。
+    <span style="font-weight:500;color:#993C1D;" data-i18n="selling_pt">卖点：</span><span data-i18n="rsi_pitch">三层结构设计——SPYI 提供 S&P 500 期权溢价月月落袋，SCHD 季度派息贡献质量股息，USFR 浮息国债兜底稳定性且享 PIE 免税。波动率仅 <strong>10.7%</strong>，为三产品最低，Sharpe 0.47，最大回撤 −12.7%，是机构级稳健配置首选。</span>
   </div>
-  <div style="font-size:11px;color:#999;">回测期：Feb 2023 – Mar 2026（3.13年）· 税后累计总回报 +28.1% · 年化 +9.0%/yr · V19 统一 30% WHT（USFR 0%）</div>
+  <div style="font-size:11px;color:#999;" data-i18n="rsi_backtest">回测期：Feb 2023 – Mar 2026（3.13年）· 税后累计总回报 +28.1% · 年化 +9.0%/yr · V19 统一 30% WHT（USFR 0%）</div>
 </div>
 
 <div id="info-reng" class="card" style="margin-bottom:14px;display:none;">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
-    <div style="font-size:15px;font-weight:500;">rENG <span style="font-size:13px;color:#666;font-weight:400;">— 能源加黄金（Energy n Gold）</span></div>
+    <div style="font-size:15px;font-weight:500;">rENG <span style="font-size:13px;color:#666;font-weight:400;">— <span data-i18n="reng_tagline">能源加黄金（Energy n Gold）</span></span></div>
     <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#FAC77533;color:#633806;">XLE 50% · AMLP 25% · GLD 25%</span>
-    <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#f5f4f0;color:#666;">季度分红</span>
+    <span style="font-size:11px;padding:2px 10px;border-radius:8px;background:#f5f4f0;color:#666;" data-i18n="quarterly_dist">季度分红</span>
   </div>
   <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:12px;">
-    <div class="metric"><label>年化波动率</label><div class="val">17.9%</div></div>
-    <div class="metric"><label>Sharpe Ratio</label><div class="val">0.95</div><small>Rf = 4%，最高</small></div>
-    <div class="metric"><label>最大回撤</label><div class="val neg">−12.5%</div></div>
-    <div class="metric" style="border:1.5px solid #FAC775;"><label>TTM 税后净派息率</label><div id="info-reng-divrate" class="val" style="color:#854F0B;">2.16%</div></div>
-    <div class="metric" style="border:1.5px solid #FAC775;"><label>TTM 税后总回报</label><div id="info-reng-total" class="val" style="color:#854F0B;">—</div></div>
+    <div class="metric"><label data-i18n="ann_vol">年化波动率</label><div class="val">17.9%</div></div>
+    <div class="metric"><label>Sharpe Ratio</label><div class="val">0.95</div><small data-i18n="sharpe_best">Rf = 4%，最高</small></div>
+    <div class="metric"><label data-i18n="max_dd">最大回撤</label><div class="val neg">−12.5%</div></div>
+    <div class="metric" style="border:1.5px solid #FAC775;"><label data-i18n="ttm_div_rate">TTM 税后净派息率</label><div id="info-reng-divrate" class="val" style="color:#854F0B;">2.16%</div></div>
+    <div class="metric" style="border:1.5px solid #FAC775;"><label data-i18n="ttm_total_ret">TTM 税后总回报</label><div id="info-reng-total" class="val" style="color:#854F0B;">—</div></div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
     <div style="font-size:12px;color:#555;line-height:1.8;">
-      <div style="font-weight:500;color:#333;margin-bottom:4px;">🎯 目标投资者</div>
-      宏观对冲 · 通胀对冲需求方
+      <div style="font-weight:500;color:#333;margin-bottom:4px;" data-i18n="target_investor">🎯 目标投资者</div>
+      <span data-i18n="reng_investor">宏观对冲 · 通胀对冲需求方</span>
     </div>
     <div style="font-size:12px;color:#555;line-height:1.8;">
-      <div style="font-weight:500;color:#333;margin-bottom:4px;">📅 分红频率</div>
-      XLE + AMLP 季度分红；GLD 无分红
+      <div style="font-weight:500;color:#333;margin-bottom:4px;" data-i18n="dist_freq">📅 分红频率</div>
+      <span data-i18n="reng_dist_detail">XLE + AMLP 季度分红；GLD 无分红</span>
     </div>
   </div>
   <div style="font-size:12px;line-height:1.9;color:#555;border-left:2px solid #BA7517;padding-left:10px;margin-bottom:8px;">
-    <span style="font-weight:500;color:#854F0B;">卖点：</span>三产品中 Sharpe Ratio 最高（<strong>0.95</strong>），单位风险回报最优。XLE + AMLP 提供能源现金流，GLD 25% 担当通胀对冲与宏观对冲压舱石。TTM 价格回报 +49.5%（GLD 领涨驱动），最大回撤仅 −12.5%，攻守兼备，适合宏观视角的长期配置。
+    <span style="font-weight:500;color:#854F0B;" data-i18n="selling_pt">卖点：</span><span data-i18n="reng_pitch">三产品中 Sharpe Ratio 最高（<strong>0.95</strong>），单位风险回报最优。XLE + AMLP 提供能源现金流，GLD 25% 担当通胀对冲与宏观对冲压舱石。TTM 价格回报 +49.5%（GLD 领涨驱动），最大回撤仅 −12.5%，攻守兼备，适合宏观视角的长期配置。</span>
   </div>
-  <div style="font-size:11px;color:#999;">回测期：Feb 2023 – Mar 2026（3.13年）· 税后累计总回报 +65.6% · 年化 +21.0%/yr · V19 统一 30% WHT（GLD 0%）</div>
+  <div style="font-size:11px;color:#999;" data-i18n="reng_backtest">回测期：Feb 2023 – Mar 2026（3.13年）· 税后累计总回报 +65.6% · 年化 +21.0%/yr · V19 统一 30% WHT（GLD 0%）</div>
 </div>
 
 
 <!-- rAI -->
 <div class="card" id="sliders-rai">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-    <div style="font-size:14px;font-weight:500;">配置比例 <span id="badge-rai" style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin-left:6px;background:#B5D4F4;color:#0C447C;">QQQI 75% / NVDY 25%</span></div>
-    <div style="font-size:13px;color:#666;">本金 <input id="capital-input" type="number" value="100000" min="1000" step="1000" style="width:110px;margin-left:4px;"> USD</div>
+    <div style="font-size:14px;font-weight:500;"><span data-i18n="allocation">配置比例</span> <span id="badge-rai" style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin-left:6px;background:#B5D4F4;color:#0C447C;">QQQI 75% / NVDY 25%</span></div>
+    <div style="font-size:13px;color:#666;"><span data-i18n="capital">本金</span> <input id="capital-input" type="number" value="100000" min="1000" step="1000" style="width:110px;margin-left:4px;"> USD</div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
     <span style="font-size:13px;min-width:52px;color:#0C447C;font-weight:500;">QQQI</span>
@@ -159,7 +162,7 @@ button { cursor: pointer; font-family: inherit; }
 <!-- rSI -->
 <div class="card" id="sliders-rsi" style="display:none;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-    <div style="font-size:14px;font-weight:500;">配置比例 <span id="badge-rsi" style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin-left:6px;background:#F5C4B3;color:#712B13;">SPYI 65% / SCHD 25% / USFR 10%</span></div>
+    <div style="font-size:14px;font-weight:500;"><span data-i18n="allocation">配置比例</span> <span id="badge-rsi" style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin-left:6px;background:#F5C4B3;color:#712B13;">SPYI 65% / SCHD 25% / USFR 10%</span></div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
     <span style="font-size:13px;min-width:52px;color:#712B13;font-weight:500;">SPYI</span>
@@ -182,7 +185,7 @@ button { cursor: pointer; font-family: inherit; }
     <span id="bar-rsi-u" style="display:inline-block;height:10px;width:10%;background:#1D9E75;border-radius:0 5px 5px 0;"></span>
   </div>
   <div style="display:flex;justify-content:space-between;font-size:11px;color:#666;">
-    <span id="rsi-total" style="font-weight:500;color:#185FA5;">总计 = 100%</span>
+    <span id="rsi-total" style="font-weight:500;color:#185FA5;"><span data-i18n="total_eq">总计 = </span>100%</span>
     <span>三者合计 100%</span>
   </div>
 </div>
@@ -190,7 +193,7 @@ button { cursor: pointer; font-family: inherit; }
 <!-- rENG -->
 <div class="card" id="sliders-reng" style="display:none;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-    <div style="font-size:14px;font-weight:500;">配置比例 <span id="badge-reng" style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin-left:6px;background:#FAC77533;color:#633806;">XLE 50% / AMLP 25% / GLD 25%</span></div>
+    <div style="font-size:14px;font-weight:500;"><span data-i18n="allocation">配置比例</span> <span id="badge-reng" style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin-left:6px;background:#FAC77533;color:#633806;">XLE 50% / AMLP 25% / GLD 25%</span></div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
     <span style="font-size:13px;min-width:52px;color:#633806;font-weight:500;">XLE</span>
@@ -213,34 +216,34 @@ button { cursor: pointer; font-family: inherit; }
     <span id="bar-reng-g" style="display:inline-block;height:10px;width:34%;background:#EF9F27;border-radius:0 5px 5px 0;"></span>
   </div>
   <div style="display:flex;justify-content:space-between;font-size:11px;color:#666;">
-    <span id="reng-total" style="font-weight:500;color:#185FA5;">总计 = 100%</span>
-    <span>三者合计 100%</span>
+    <span id="reng-total" style="font-weight:500;color:#185FA5;"><span data-i18n="total_eq">总计 = </span>100%</span>
+    <span data-i18n="sum100">三者合计 100%</span>
   </div>
 </div>
 <div class="card" style="padding:0.75rem 1.25rem;">
 <!-- Chart toggle -->
 <button class="toggle-btn" onclick="togglePanel('chart')" style="margin-top:0;">
-  <span>📈 过去12个月业绩走势图（TTM）</span>
+  <span data-i18n="chart_toggle">📈 过去12个月业绩走势图（TTM）</span>
   <span id="chart-arrow">▼</span>
 </button>
 <div id="chart-panel" style="display:none;margin-top:10px;">
-  <div style="font-size:11px;color:#999;margin-bottom:8px;">Mar 25, 2025 → Mar 25, 2026 · 起始本金归一为 100 · 数据来源：xlsx v3 逐笔分红</div>
+  <div style="font-size:11px;color:#999;margin-bottom:8px;" data-i18n="chart_subtitle">Mar 25, 2025 → Mar 25, 2026 · 起始本金归一为 100 · 数据来源：xlsx v3 逐笔分红</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;font-size:11px;color:#666;">
-    <span style="display:flex;align-items:center;gap:5px;"><svg width="24" height="8"><line id="nav-legend-line" x1="0" y1="4" x2="24" y2="4" stroke="#1a1a1a" stroke-width="2"/></svg>本金金库（NAV）</span>
-    <span style="display:flex;align-items:center;gap:5px;"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#EF9F27" stroke-width="2.5" stroke-dasharray="5,3"/></svg>收益金库（累计派息）</span>
+    <span style="display:flex;align-items:center;gap:5px;"><svg width="24" height="8"><line id="nav-legend-line" x1="0" y1="4" x2="24" y2="4" stroke="#1a1a1a" stroke-width="2"/></svg><span data-i18n="nav_legend">本金金库（NAV）</span></span>
+    <span style="display:flex;align-items:center;gap:5px;"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#EF9F27" stroke-width="2.5" stroke-dasharray="5,3"/></svg><span data-i18n="div_legend">收益金库（累计派息）</span></span>
   </div>
   <div style="position:relative;width:100%;height:260px;"><canvas id="ttmChart"></canvas></div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;">
-    <div class="metric"><label>TTM 本金变动</label><div id="c-nav" class="val"></div><div id="c-nav-sub" style="font-size:11px;color:#666;margin-top:2px;"></div></div>
-    <div class="metric"><label>TTM 累计派息（税前）</label><div id="c-div" class="val" style="color:#EF9F27;"></div><div id="c-div-sub" style="font-size:11px;color:#666;margin-top:2px;"></div></div>
-    <div class="metric"><label>税后派息（−30%）</label><div id="c-post" class="val" style="color:#BA7517;"></div><div style="font-size:11px;color:#666;margin-top:2px;">WHT 30%</div></div>
-    <div class="metric" style="border:1.5px solid #B5D4F4;"><label>TTM 税后总回报</label><div id="c-total" class="val pos"></div><div style="font-size:11px;color:#666;margin-top:2px;">派息税后 + 价格</div></div>
+    <div class="metric"><label data-i18n="ttm_nav">TTM 本金变动</label><div id="c-nav" class="val"></div><div id="c-nav-sub" style="font-size:11px;color:#666;margin-top:2px;"></div></div>
+    <div class="metric"><label data-i18n="ttm_div_pretax">TTM 累计派息（税前）</label><div id="c-div" class="val" style="color:#EF9F27;"></div><div id="c-div-sub" style="font-size:11px;color:#666;margin-top:2px;"></div></div>
+    <div class="metric"><label data-i18n="aftertax_div">税后派息（−30%）</label><div id="c-post" class="val" style="color:#BA7517;"></div><div style="font-size:11px;color:#666;margin-top:2px;">WHT 30%</div></div>
+    <div class="metric" style="border:1.5px solid #B5D4F4;"><label data-i18n="ttm_total_ret">TTM 税后总回报</label><div id="c-total" class="val pos"></div><div style="font-size:11px;color:#666;margin-top:2px;" data-i18n="div_plus_price">派息税后 + 价格</div></div>
   </div>
 </div>
 
 <!-- Monthly toggle -->
 <button class="toggle-btn" onclick="togglePanel('monthly')">
-  <span>📅 每月派息明细（TTM 逐笔）</span>
+  <span data-i18n="monthly_toggle">📅 每月派息明细（TTM 逐笔）</span>
   <span id="monthly-arrow">▼</span>
 </button>
 <div id="monthly-panel" style="display:none;margin-top:8px;">
@@ -248,31 +251,31 @@ button { cursor: pointer; font-family: inherit; }
     <div>
       <div id="col1-label" style="font-size:11px;font-weight:500;margin-bottom:4px;color:#185FA5;">QQQI TTM（13笔）</div>
       <table class="monthly-table">
-        <tr><th>除息日</th><th>每股$</th><th id="qh-w">加权</th></tr>
+        <tr><th data-i18n="ex_date">除息日</th><th data-i18n="per_share">每股$</th><th id="qh-w">加权</th></tr>
         <tbody id="qqqi-body"></tbody>
       </table>
     </div>
     <div>
       <div id="col2-label" style="font-size:11px;font-weight:500;margin-bottom:4px;color:#3B6D11;">NVDY TTM（31笔）</div>
       <table class="monthly-table">
-        <tr><th>除息日</th><th>每股$</th><th id="nh-w">加权</th></tr>
+        <tr><th data-i18n="ex_date">除息日</th><th data-i18n="per_share">每股$</th><th id="nh-w">加权</th></tr>
         <tbody id="nvdy-body"></tbody>
       </table>
     </div>
     <div id="col3-wrap" style="display:none;">
       <div id="col3-label" style="font-size:11px;font-weight:500;margin-bottom:4px;"></div>
       <table class="monthly-table">
-        <tr><th>除息日</th><th>每股$</th><th id="uh-w">加权</th></tr>
+        <tr><th data-i18n="ex_date">除息日</th><th data-i18n="per_share">每股$</th><th id="uh-w">加权</th></tr>
         <tbody id="usfr-body"></tbody>
       </table>
     </div>
   </div>
   <div style="background:#f5f4f0;border-radius:8px;padding:10px 12px;font-size:12px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
-      <div><div id="m-qlabel" style="color:#666;margin-bottom:2px;">QQQI 派息率</div><div id="m-qrate" style="font-weight:500;color:#185FA5;"></div></div>
-      <div><div id="m-nlabel" style="color:#666;margin-bottom:2px;">NVDY 派息率</div><div id="m-nrate" style="font-weight:500;color:#3B6D11;"></div></div>
-      <div><div style="color:#666;margin-bottom:2px;">组合税前派息</div><div id="m-pre" style="font-weight:500;"></div></div>
-      <div><div style="color:#666;margin-bottom:2px;">税后月均到手</div><div id="m-monthly" style="font-weight:500;color:#BA7517;"></div></div>
+      <div><div id="m-qlabel" style="color:#666;margin-bottom:2px;" data-i18n="qqqi_yield">QQQI 派息率</div><div id="m-qrate" style="font-weight:500;color:#185FA5;"></div></div>
+      <div><div id="m-nlabel" style="color:#666;margin-bottom:2px;" data-i18n="nvdy_yield">NVDY 派息率</div><div id="m-nrate" style="font-weight:500;color:#3B6D11;"></div></div>
+      <div><div style="color:#666;margin-bottom:2px;" data-i18n="port_pretax_yield">组合税前派息</div><div id="m-pre" style="font-weight:500;"></div></div>
+      <div><div style="color:#666;margin-bottom:2px;" data-i18n="monthly_aftertax">税后月均到手</div><div id="m-monthly" style="font-weight:500;color:#BA7517;"></div></div>
     </div>
   </div>
 </div>
@@ -280,31 +283,31 @@ button { cursor: pointer; font-family: inherit; }
 
 <div style="display:flex;gap:8px;margin-bottom:14px;">
   <button id="dtab-ttm" onclick="setData('ttm')" style="padding:6px 14px;font-size:12px;font-weight:500;border-radius:6px;border:none;background:#185FA5;color:#fff;">TTM</button>
-  <button id="dtab-inc" onclick="setData('inception')" style="padding:6px 14px;font-size:12px;font-weight:500;border-radius:6px;border:0.5px solid #ccc;background:#f0f0ee;color:#666;">近3年年化（2023起）</button>
+  <button id="dtab-inc" onclick="setData('inception')" style="padding:6px 14px;font-size:12px;font-weight:500;border-radius:6px;border:0.5px solid #ccc;background:#f0f0ee;color:#666;" data-i18n="since2023">近3年年化（2023起）</button>
 </div>
 
 <div id="src-cards" style="display:grid;gap:10px;margin-bottom:14px;"></div>
-<div class="section-lbl">组合派息</div>
+<div class="section-lbl" data-i18n="port_yield">组合派息</div>
 <div id="div-grid" style="display:grid;gap:10px;margin-bottom:14px;"></div>
-<div class="section-lbl">组合总回报</div>
+<div class="section-lbl" data-i18n="port_total">组合总回报</div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
-  <div class="metric"><label>加权价格变动</label><div class="val" id="r-price">—</div><small id="r-price-amt">—</small></div>
-  <div class="metric"><label>税前总回报</label><div class="val" id="r-total-pre">—</div><small id="r-total-pre-amt">—</small></div>
-  <div class="metric"><label>税后月均派息</label><div class="val pos" id="r-monthly">—</div><small>每月到手</small></div>
-  <div class="metric" style="border:1.5px solid #B5D4F4;"><label>税后总回报</label><div class="val pos" id="r-total-post">—</div><small id="r-total-post-amt">—</small></div>
+  <div class="metric"><label data-i18n="wtd_price">加权价格变动</label><div class="val" id="r-price">—</div><small id="r-price-amt">—</small></div>
+  <div class="metric"><label data-i18n="pretax_total">税前总回报</label><div class="val" id="r-total-pre">—</div><small id="r-total-pre-amt">—</small></div>
+  <div class="metric"><label data-i18n="monthly_income">税后月均派息</label><div class="val pos" id="r-monthly">—</div><small data-i18n="per_month">每月到手</small></div>
+  <div class="metric" style="border:1.5px solid #B5D4F4;"><label data-i18n="aftertax_total">税后总回报</label><div class="val pos" id="r-total-post">—</div><small id="r-total-post-amt">—</small></div>
 </div>
 <div class="note" id="bottom-note">数据来源：Yahoo Finance</div>
-<div class="note warn">税后总回报 = 税后派息 + 价格变动。GLD 不派息。NVDY 派息约95%为资本返还，实际预扣税可能低于30%。TTM 派息率基于起始价格计算。</div>
+<div class="note warn" data-i18n="disclaimer">税后总回报 = 税后派息 + 价格变动。GLD 不派息。NVDY 派息约95%为资本返还，实际预扣税可能低于30%。TTM 派息率基于起始价格计算。</div>
 
 <div style="margin-top:20px;padding-top:16px;border-top:0.5px solid #ddd;font-size:11px;color:#999;line-height:2;">
-  <strong>数据来源备注：</strong><br>
-  rAI TTM：xlsx v3（20260326）· 逐笔验证 · QQQI 13笔 / NVDY 31笔 · 2025-03-25→2026-03-25<br>
+  <strong data-i18n="datasrc_title">数据来源备注：</strong><br>
+  <span data-i18n="datasrc_body">rAI TTM：xlsx v3（20260326）· 逐笔验证 · QQQI 13笔 / NVDY 31笔 · 2025-03-25→2026-03-25<br>
   rAI 成立以来：同文件 · 统一基准 Jan 30,2024→Mar 25,2026（2.15年）· QQQI 26笔 / NVDY 45笔<br>
   rSI TTM：SPYI Yahoo Finance 截至 3/20/2026 · SCHD Yahoo Finance 截至 3/11/2026 · USFR stockanalysis.com<br>
   rSI 成立以来：SPYI Aug 2022起 · SCHD 2011起 · USFR Feb 2014起（各自成立日）<br>
-  rENG TTM：XLE & AMLP Yahoo Finance 截至 3/23/2026 · GLD investing.com 截至 3/26/2026（TTM +48.44%）<br>
+  rENG TTM：XLE &amp; AMLP Yahoo Finance 截至 3/23/2026 · GLD investing.com 截至 3/26/2026（TTM +48.44%）<br>
   rENG 成立以来：统一基准 Aug 25,2010→Mar 25,2026（约15.6年）· XLE 派息用 financecharts.com 10年均值<br>
-  预扣税率：30%（新加坡居民持有美股默认税率）
+  预扣税率：30%（新加坡居民持有美股默认税率）</span>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -437,73 +440,76 @@ function renderChart(w1,w2,w3){
     {label:'本金',data:navLine,borderColor:'#1a1a1a',backgroundColor:'transparent',borderWidth:2,pointRadius:3.5,pointBackgroundColor:'#1a1a1a',tension:0.35,fill:false},
     {label:'累计派息',data:divLine,borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,0.08)',borderWidth:2.5,pointRadius:2.5,pointBackgroundColor:'#EF9F27',tension:0.3,fill:'origin',borderDash:[7,4]}
   ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,titleColor:'#222',bodyColor:'#555',padding:9,callbacks:{label:ctx=>{const v=ctx.parsed.y;if(ctx.datasetIndex===0)return'  本金：'+v.toFixed(2)+'% ('+(v>=100?'+':'')+((v-100).toFixed(2))+'%)';return'  累计派息：+'+(v-100).toFixed(2)+'%';}}}},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,titleColor:'#222',bodyColor:'#555',padding:9,callbacks:{label:ctx=>{const v=ctx.parsed.y;const tl=T[LANG];if(ctx.datasetIndex===0)return'  '+(LANG==='zh'?'本金':'NAV')+': '+v.toFixed(2)+'% ('+(v>=100?'+':'')+((v-100).toFixed(2))+'%)';return'  '+(LANG==='zh'?'累计派息':'Cum. Dist.')+': +'+(v-100).toFixed(2)+'%';}}}},
     scales:{x:{grid:{color:gc},ticks:{color:tc,font:{size:11},maxRotation:0,maxTicksLimit:13}},y:{grid:{color:gc},ticks:{color:tc,font:{size:11},callback:v=>v+'%'},min:yMin,max:yMax}}}});
 }
 
 function renderMonthly(w1,w2,w3,capital){
+  const tl=T[LANG];
   if(portfolio==='rai'){
     document.getElementById('monthly-grid').style.gridTemplateColumns='1fr 1fr';
     document.getElementById('col3-wrap').style.display='none';
-    document.getElementById('col1-label').textContent='QQQI TTM（13笔）'; document.getElementById('col1-label').style.color='#185FA5';
-    document.getElementById('col2-label').textContent='NVDY TTM（31笔）'; document.getElementById('col2-label').style.color='#3B6D11';
-    document.getElementById('m-qlabel').textContent='QQQI 派息率';
-    document.getElementById('m-nlabel').textContent='NVDY 派息率';
+    document.getElementById('col1-label').textContent=LANG==='zh'?'QQQI TTM（13笔）':'QQQI TTM (13 records)'; document.getElementById('col1-label').style.color='#185FA5';
+    document.getElementById('col2-label').textContent=LANG==='zh'?'NVDY TTM（31笔）':'NVDY TTM (31 records)'; document.getElementById('col2-label').style.color='#3B6D11';
+    document.getElementById('m-qlabel').textContent=LANG==='zh'?'QQQI 派息率':'QQQI Yield';
+    document.getElementById('m-nlabel').textContent=LANG==='zh'?'NVDY 派息率':'NVDY Yield';
     const qTot=QQQI_TTM.reduce((a,r)=>a+r.div,0),nTot=NVDY_TTM.reduce((a,r)=>a+r.div,0);
     let qRows='';QQQI_TTM.forEach(r=>{qRows+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(3)}</td><td style="color:#BA7517">$${(r.div*w1/100).toFixed(3)}</td></tr>`;});
-    qRows+=`<tr><td>合计</td><td>$${qTot.toFixed(3)}</td><td style="color:#BA7517">$${(qTot*w1/100).toFixed(3)}</td></tr>`;
+    qRows+=`<tr><td>${tl.total_row}</td><td>$${qTot.toFixed(3)}</td><td style="color:#BA7517">$${(qTot*w1/100).toFixed(3)}</td></tr>`;
     document.getElementById('qqqi-body').innerHTML=qRows;
     let nRows='';NVDY_TTM.forEach(r=>{nRows+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(3)}</td><td style="color:#185FA5">$${(r.div*w2/100).toFixed(3)}</td></tr>`;});
-    nRows+=`<tr><td>合计</td><td>$${nTot.toFixed(3)}</td><td style="color:#185FA5">$${(nTot*w2/100).toFixed(3)}</td></tr>`;
+    nRows+=`<tr><td>${tl.total_row}</td><td>$${nTot.toFixed(3)}</td><td style="color:#185FA5">$${(nTot*w2/100).toFixed(3)}</td></tr>`;
     document.getElementById('nvdy-body').innerHTML=nRows;
-    document.getElementById('qh-w').textContent='加权'+w1+'%';document.getElementById('nh-w').textContent='加权'+w2+'%';
+    document.getElementById('qh-w').textContent=tl.wtd_label+w1+'%';document.getElementById('nh-w').textContent=tl.wtd_label+w2+'%';
     const pre=((qTot/Q_START*(w1/100)+nTot/N_START*(w2/100))*100).toFixed(2);
     document.getElementById('m-qrate').textContent=(qTot/Q_START*100).toFixed(2)+'%';
     document.getElementById('m-nrate').textContent=(nTot/N_START*100).toFixed(2)+'%';
     document.getElementById('m-pre').textContent=pre+'%';
     document.getElementById('m-monthly').textContent='$'+Math.round(capital*(qTot/Q_START*(w1/100)+nTot/N_START*(w2/100))*0.7/12).toLocaleString()+'/mo';
   } else if(portfolio==='rsi'){
+    const tl=T[LANG];
     document.getElementById('monthly-grid').style.gridTemplateColumns='1fr 1fr 1fr';
     document.getElementById('col3-wrap').style.display='';
-    document.getElementById('col1-label').textContent='SPYI TTM（13笔）'; document.getElementById('col1-label').style.color='#993C1D';
-    document.getElementById('col2-label').textContent='SCHD TTM（5笔·季付）'; document.getElementById('col2-label').style.color='#534AB7';
-    document.getElementById('col3-label').textContent='USFR TTM（12笔）'; document.getElementById('col3-label').style.color='#085041';
-    document.getElementById('m-qlabel').textContent='SPYI 派息率';
-    document.getElementById('m-nlabel').textContent='SCHD 派息率';
+    document.getElementById('col1-label').textContent=LANG==='zh'?'SPYI TTM（13笔）':'SPYI TTM (13 records)'; document.getElementById('col1-label').style.color='#993C1D';
+    document.getElementById('col2-label').textContent=LANG==='zh'?'SCHD TTM（5笔·季付）':'SCHD TTM (5 records · quarterly)'; document.getElementById('col2-label').style.color='#534AB7';
+    document.getElementById('col3-label').textContent=tl.col3_si_u; document.getElementById('col3-label').style.color='#085041';
+    document.getElementById('m-qlabel').textContent=LANG==='zh'?'SPYI 派息率':'SPYI Yield';
+    document.getElementById('m-nlabel').textContent=LANG==='zh'?'SCHD 派息率':'SCHD Yield';
     const t1=SPYI_TTM.reduce((a,r)=>a+r.div,0),t2=SCHD_TTM.reduce((a,r)=>a+r.div,0),t3=USFR_TTM.reduce((a,r)=>a+r.div,0);
     let r1='';SPYI_TTM.forEach(r=>{r1+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(4)}</td><td style="color:#BA7517">$${(r.div*w1/100).toFixed(4)}</td></tr>`;});
-    r1+=`<tr><td>合计</td><td>$${t1.toFixed(4)}</td><td style="color:#BA7517">$${(t1*w1/100).toFixed(4)}</td></tr>`;
+    r1+=`<tr><td>${tl.total_row}</td><td>$${t1.toFixed(4)}</td><td style="color:#BA7517">$${(t1*w1/100).toFixed(4)}</td></tr>`;
     let r2='';SCHD_TTM.forEach(r=>{r2+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(4)}</td><td style="color:#185FA5">$${(r.div*w2/100).toFixed(4)}</td></tr>`;});
-    r2+=`<tr><td>合计</td><td>$${t2.toFixed(4)}</td><td style="color:#185FA5">$${(t2*w2/100).toFixed(4)}</td></tr>`;
+    r2+=`<tr><td>${tl.total_row}</td><td>$${t2.toFixed(4)}</td><td style="color:#185FA5">$${(t2*w2/100).toFixed(4)}</td></tr>`;
     let r3='';USFR_TTM.forEach(r=>{r3+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(4)}</td><td style="color:#0F6E56">$${(r.div*w3/100).toFixed(4)}</td></tr>`;});
-    r3+=`<tr><td>合计</td><td>$${t3.toFixed(4)}</td><td style="color:#0F6E56">$${(t3*w3/100).toFixed(4)}</td></tr>`;
+    r3+=`<tr><td>${tl.total_row}</td><td>$${t3.toFixed(4)}</td><td style="color:#0F6E56">$${(t3*w3/100).toFixed(4)}</td></tr>`;
     document.getElementById('qqqi-body').innerHTML=r1;
     document.getElementById('nvdy-body').innerHTML=r2;
     document.getElementById('usfr-body').innerHTML=r3;
-    document.getElementById('qh-w').textContent='加权'+w1+'%';document.getElementById('nh-w').textContent='加权'+w2+'%';document.getElementById('uh-w').textContent='加权'+w3+'%';
+    document.getElementById('qh-w').textContent=tl.wtd_label+w1+'%';document.getElementById('nh-w').textContent=tl.wtd_label+w2+'%';document.getElementById('uh-w').textContent=tl.wtd_label+w3+'%';
     const pre=((t1/SPYI_START*(w1/100)+t2/SCHD_START*(w2/100)+t3/USFR_START*(w3/100))*100).toFixed(2);
     document.getElementById('m-qrate').textContent=(t1/SPYI_START*100).toFixed(2)+'% (SPYI)';
     document.getElementById('m-nrate').textContent=(t2/SCHD_START*100).toFixed(2)+'% (SCHD)';
     document.getElementById('m-pre').textContent=pre+'%';
     document.getElementById('m-monthly').textContent='$'+Math.round(capital*(t1/SPYI_START*(w1/100)+t2/SCHD_START*(w2/100)+t3/USFR_START*(w3/100))*0.7/12).toLocaleString()+'/mo';
   } else {
+    const tl=T[LANG];
     document.getElementById('monthly-grid').style.gridTemplateColumns='1fr 1fr 1fr';
     document.getElementById('col3-wrap').style.display='';
-    document.getElementById('col1-label').textContent='XLE TTM（4笔·季付）'; document.getElementById('col1-label').style.color='#854F0B';
-    document.getElementById('col2-label').textContent='AMLP TTM（4笔·季付）'; document.getElementById('col2-label').style.color='#534AB7';
-    document.getElementById('col3-label').textContent='GLD TTM（不派息）'; document.getElementById('col3-label').style.color='#999';
-    document.getElementById('m-qlabel').textContent='XLE 派息率';
-    document.getElementById('m-nlabel').textContent='AMLP 派息率';
+    document.getElementById('col1-label').textContent=LANG==='zh'?'XLE TTM（4笔·季付）':'XLE TTM (4 records · quarterly)'; document.getElementById('col1-label').style.color='#854F0B';
+    document.getElementById('col2-label').textContent=LANG==='zh'?'AMLP TTM（4笔·季付）':'AMLP TTM (4 records · quarterly)'; document.getElementById('col2-label').style.color='#534AB7';
+    document.getElementById('col3-label').textContent=tl.col3_eng_g; document.getElementById('col3-label').style.color='#999';
+    document.getElementById('m-qlabel').textContent=LANG==='zh'?'XLE 派息率':'XLE Yield';
+    document.getElementById('m-nlabel').textContent=LANG==='zh'?'AMLP 派息率':'AMLP Yield';
     const t1=XLE_TTM.reduce((a,r)=>a+r.div,0),t2=AMLP_TTM.reduce((a,r)=>a+r.div,0),t3=GLD_TTM.reduce((a,r)=>a+r.div,0);
     let r1='';XLE_TTM.forEach(r=>{r1+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(6)}</td><td style="color:#BA7517">$${(r.div*w1/100).toFixed(6)}</td></tr>`;});
-    r1+=`<tr><td>合计</td><td>$${t1.toFixed(6)}</td><td style="color:#BA7517">$${(t1*w1/100).toFixed(6)}</td></tr>`;
+    r1+=`<tr><td>${tl.total_row}</td><td>$${t1.toFixed(6)}</td><td style="color:#BA7517">$${(t1*w1/100).toFixed(6)}</td></tr>`;
     let r2='';AMLP_TTM.forEach(r=>{r2+=`<tr><td>${fmtDate(r.date)}</td><td>$${r.div.toFixed(3)}</td><td style="color:#185FA5">$${(r.div*w2/100).toFixed(3)}</td></tr>`;});
-    r2+=`<tr><td>合计</td><td>$${t2.toFixed(3)}</td><td style="color:#185FA5">$${(t2*w2/100).toFixed(3)}</td></tr>`;
-    let r3='<tr><td colspan="3" style="color:#999;padding:6px;text-align:center;">GLD 不派息</td></tr>';
+    r2+=`<tr><td>${tl.total_row}</td><td>$${t2.toFixed(3)}</td><td style="color:#185FA5">$${(t2*w2/100).toFixed(3)}</td></tr>`;
+    let r3=`<tr><td colspan="3" style="color:#999;padding:6px;text-align:center;">${tl.gld_no_div}</td></tr>`;
     document.getElementById('qqqi-body').innerHTML=r1;
     document.getElementById('nvdy-body').innerHTML=r2;
     document.getElementById('usfr-body').innerHTML=r3;
-    document.getElementById('qh-w').textContent='加权'+w1+'%';document.getElementById('nh-w').textContent='加权'+w2+'%';document.getElementById('uh-w').textContent='加权'+w3+'%';
+    document.getElementById('qh-w').textContent=tl.wtd_label+w1+'%';document.getElementById('nh-w').textContent=tl.wtd_label+w2+'%';document.getElementById('uh-w').textContent=tl.wtd_label+w3+'%';
     const pre=((t1/XLE_START*(w1/100)+t2/AMLP_START*(w2/100))*100).toFixed(2);
     document.getElementById('m-qrate').textContent=(t1/XLE_START*100).toFixed(2)+'% (XLE)';
     document.getElementById('m-nrate').textContent=(t2/AMLP_START*100).toFixed(2)+'% (AMLP)';
@@ -518,15 +524,16 @@ function togglePanel(which){
 }
 
 function calc(){
+  const t=T[LANG];
   const p=PORTFOLIOS[portfolio];const d=p.data[dataMode];const weights=getWeights();const capital=parseFloat(document.getElementById('capital-input').value)||100000;const n=p.etfs.length;
   if(portfolio==='rai'){const q=weights[0],nv=weights[1];document.getElementById('rai-qqqi-pct').textContent=q+'%';document.getElementById('rai-nvdy-pct').textContent=nv+'%';document.getElementById('bar-rai-q').style.width=q+'%';document.getElementById('bar-rai-n').style.width=nv+'%';document.getElementById('badge-rai').textContent='QQQI '+q+'% / NVDY '+nv+'%';if(chartOpen)renderChart(q,nv,0);if(monthlyOpen)renderMonthly(q,nv,0,capital);}
-  else if(portfolio==='rsi'){const[s,c,u]=weights;document.getElementById('rsi-spyi-pct').textContent=s+'%';document.getElementById('rsi-schd-pct').textContent=c+'%';document.getElementById('rsi-usfr-pct').textContent=u+'%';document.getElementById('bar-rsi-s').style.width=s+'%';document.getElementById('bar-rsi-c').style.width=c+'%';document.getElementById('bar-rsi-u').style.width=u+'%';const t=s+c+u;document.getElementById('rsi-total').textContent='总计 = '+t+'%';document.getElementById('rsi-total').style.color=t===100?'#185FA5':'#A32D2D';document.getElementById('badge-rsi').textContent='SPYI '+s+'% / SCHD '+c+'% / USFR '+u+'%';if(chartOpen)renderChart(s,c,u);if(monthlyOpen)renderMonthly(s,c,u,capital);}
-  else{const[x,a,g]=weights;document.getElementById('reng-xle-pct').textContent=x+'%';document.getElementById('reng-amlp-pct').textContent=a+'%';document.getElementById('reng-gld-pct').textContent=g+'%';document.getElementById('bar-reng-x').style.width=x+'%';document.getElementById('bar-reng-a').style.width=a+'%';document.getElementById('bar-reng-g').style.width=g+'%';const t=x+a+g;document.getElementById('reng-total').textContent='总计 = '+t+'%';document.getElementById('reng-total').style.color=t===100?'#185FA5':'#A32D2D';document.getElementById('badge-reng').textContent='XLE '+x+'% / AMLP '+a+'% / GLD '+g+'%';if(chartOpen)renderChart(x,a,g);if(monthlyOpen)renderMonthly(x,a,g,capital);}
+  else if(portfolio==='rsi'){const[s,c,u]=weights;document.getElementById('rsi-spyi-pct').textContent=s+'%';document.getElementById('rsi-schd-pct').textContent=c+'%';document.getElementById('rsi-usfr-pct').textContent=u+'%';document.getElementById('bar-rsi-s').style.width=s+'%';document.getElementById('bar-rsi-c').style.width=c+'%';document.getElementById('bar-rsi-u').style.width=u+'%';const tot=s+c+u;document.getElementById('rsi-total').innerHTML=t.total_eq+tot+'%';document.getElementById('rsi-total').style.color=tot===100?'#185FA5':'#A32D2D';document.getElementById('badge-rsi').textContent='SPYI '+s+'% / SCHD '+c+'% / USFR '+u+'%';if(chartOpen)renderChart(s,c,u);if(monthlyOpen)renderMonthly(s,c,u,capital);}
+  else{const[x,a,g]=weights;document.getElementById('reng-xle-pct').textContent=x+'%';document.getElementById('reng-amlp-pct').textContent=a+'%';document.getElementById('reng-gld-pct').textContent=g+'%';document.getElementById('bar-reng-x').style.width=x+'%';document.getElementById('bar-reng-a').style.width=a+'%';document.getElementById('bar-reng-g').style.width=g+'%';const tot=x+a+g;document.getElementById('reng-total').innerHTML=t.total_eq+tot+'%';document.getElementById('reng-total').style.color=tot===100?'#185FA5':'#A32D2D';document.getElementById('badge-reng').textContent='XLE '+x+'% / AMLP '+a+'% / GLD '+g+'%';if(chartOpen)renderChart(x,a,g);if(monthlyOpen)renderMonthly(x,a,g,capital);}
   document.getElementById('src-cards').style.gridTemplateColumns=n===3?'repeat(3,1fr)':'1fr 1fr';
-  document.getElementById('src-cards').innerHTML=p.etfs.map((etf,i)=>`<div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:500;margin-bottom:8px;">${etf}<span style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;background:${p.colors[i]}22;color:${p.colors[i]};margin-left:6px;">${weights[i]||0}%</span></div><table style="width:100%;font-size:12px;border-collapse:collapse;"><tr><td style="color:#666;padding:3px 0;">派息率</td><td style="text-align:right;font-weight:500;">${fmtP(d[i].div)}</td></tr><tr><td style="color:#666;padding:3px 0;">价格变动</td><td style="text-align:right;">${fmt(d[i].price)}</td></tr><tr><td style="color:#666;padding:3px 0;">总回报</td><td style="text-align:right;font-weight:500;color:#185FA5;">${fmt(d[i].total)}</td></tr></table><div class="src-tag">${d[i].src}</div></div>`).join('');
+  document.getElementById('src-cards').innerHTML=p.etfs.map((etf,i)=>`<div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:500;margin-bottom:8px;">${etf}<span style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;background:${p.colors[i]}22;color:${p.colors[i]};margin-left:6px;">${weights[i]||0}%</span></div><table style="width:100%;font-size:12px;border-collapse:collapse;"><tr><td style="color:#666;padding:3px 0;">${t.div_yield}</td><td style="text-align:right;font-weight:500;">${fmtP(d[i].div)}</td></tr><tr><td style="color:#666;padding:3px 0;">${t.price_chg}</td><td style="text-align:right;">${fmt(d[i].price)}</td></tr><tr><td style="color:#666;padding:3px 0;">${t.total_ret}</td><td style="text-align:right;font-weight:500;color:#185FA5;">${fmt(d[i].total)}</td></tr></table><div class="src-tag">${d[i].src}</div></div>`).join('');
   const dw=weights.map((w,i)=>d[i].div*w/100);const tPre=dw.reduce((a,b)=>a+b,0);const tPost=tPre*0.7;const tPrice=weights.reduce((acc,w,i)=>acc+d[i].price*w/100,0);
   document.getElementById('div-grid').style.gridTemplateColumns=`repeat(${n+2},1fr)`;
-  document.getElementById('div-grid').innerHTML=p.etfs.map((etf,i)=>`<div class="metric"><label>${etf} 加权</label><div class="val pos">${fmtP(dw[i])}</div><small>${fmtAmt(capital*dw[i]/100)}</small></div>`).join('')+`<div class="metric"><label>税前组合派息</label><div class="val">${fmtP(tPre)}</div><small>${fmtAmt(capital*tPre/100)}</small></div><div class="metric" style="border:1.5px solid #B5D4F4;"><label>税后派息 (−30%)</label><div class="val pos">${fmtP(tPost)}</div><small>${fmtAmt(capital*tPost/100)}/年</small></div>`;
+  document.getElementById('div-grid').innerHTML=p.etfs.map((etf,i)=>`<div class="metric"><label>${etf} ${t.wtd_label}</label><div class="val pos">${fmtP(dw[i])}</div><small>${fmtAmt(capital*dw[i]/100)}</small></div>`).join('')+`<div class="metric"><label>${t.pretax_port}</label><div class="val">${fmtP(tPre)}</div><small>${fmtAmt(capital*tPre/100)}</small></div><div class="metric" style="border:1.5px solid #B5D4F4;"><label>${t.aftertax_port}</label><div class="val pos">${fmtP(tPost)}</div><small>${fmtAmt(capital*tPost/100)}${t.per_yr}</small></div>`;
   const prEl=document.getElementById('r-price');prEl.textContent=fmt(tPrice);prEl.className='val '+(tPrice>=0?'pos':'neg');
   document.getElementById('r-price-amt').textContent=fmtAmt(capital*tPrice/100);
   document.getElementById('r-total-pre').textContent=fmt(tPre+tPrice);document.getElementById('r-total-pre-amt').textContent=fmtAmt(capital*(tPre+tPrice)/100);
@@ -537,11 +544,176 @@ function calc(){
   if(infoEl)infoEl.textContent=tPost.toFixed(2)+'%';
   const infoTotEl=document.getElementById('info-'+portfolio+'-total');
   if(infoTotEl)infoTotEl.textContent=(tPost+tPrice>=0?'+':'')+(tPost+tPrice).toFixed(2)+'%';
-  const notes={rai_ttm:'rAI TTM：xlsx v3（20260326）· 逐笔验证 · QQQI 13笔 / NVDY 31笔 · 2025-03-25→2026-03-25',rai_inc:'rAI 成立以来：xlsx v3 · 统一基准 Jan 30,2024→Mar 25,2026（2.15年）',rsi_ttm:'rSI TTM：xlsx v2（20260327）逐笔验证 · SPYI 13笔 / SCHD 5笔 / USFR 12笔 · 2025-03-25→2026-03-25',rsi_inc:'rSI 近3年年化：共同基准 2023-02-01→2026-03-25（3.14年）· xlsx v2 全品种逐笔验证',reng_ttm:'rENG TTM：xlsx v2（20260327）逐笔验证 · XLE 4笔 / AMLP 4笔 / GLD 0笔 · 2025-03-25→2026-03-25',reng_inc:'rENG 近3年年化：共同基准 2023-02-01→2026-03-25（3.14年）· xlsx v2 全品种逐笔验证'};
-  document.getElementById('bottom-note').textContent=notes[portfolio+'_'+(dataMode==='ttm'?'ttm':'inc')];
+  const dm=dataMode==='ttm'?'ttm':'inc';
+  const noteKey='notes_'+portfolio+'_'+dm;
+  document.getElementById('bottom-note').textContent=t[noteKey]||'';
 }
 
-document.getElementById('slider-rai').addEventListener('input',calc);
+// ── Language Toggle ──────────────────────────────────────────
+let LANG = 'zh';
+
+const T = {
+  zh: {
+    title: '组合计算器',
+    subtitle: 'rAI/rSI/rENG 数据：20260327_ETF_Historical_Data.xlsx（全品种逐笔验证）· 含 TTM 走势图 + 逐笔明细',
+    rai_tagline: 'AI极致分红',
+    rsi_tagline: '低波高分红',
+    reng_tagline: '能源加黄金（Energy n Gold）',
+    weekly_dist: '每周分红',
+    monthly_dist: '月度分红',
+    quarterly_dist: '季度分红',
+    ann_vol: '年化波动率',
+    max_dd: '最大回撤',
+    ttm_div_rate: 'TTM 税后净派息率',
+    ttm_total_ret: 'TTM 税后总回报',
+    target_investor: '🎯 目标投资者',
+    dist_freq: '📅 分红频率',
+    selling_pt: '卖点：',
+    rai_investor: '进取型 · AI主题 · 高月度现金流需求',
+    rsi_investor: '保守机构 · 家族办公室 · 稳定月度现金流',
+    reng_investor: '宏观对冲 · 通胀对冲需求方',
+    reng_dist_detail: 'XLE + AMLP 季度分红；GLD 无分红',
+    sharpe_best: 'Rf = 4%，最高',
+    rai_pitch: 'QQQI 通过 Nasdaq-100 Covered Call 策略持续产生期权溢价，NVDY 以 NVDA 单股合成期权放大收益。两者组合实现每周多次现金流入账，TTM 税后净派息率达 <strong>18.42%</strong>，适合追求极高月度被动收入的投资者。',
+    rsi_pitch: '三层结构设计——SPYI 提供 S&P 500 期权溢价月月落袋，SCHD 季度派息贡献质量股息，USFR 浮息国债兜底稳定性且享 PIE 免税。波动率仅 <strong>10.7%</strong>，为三产品最低，Sharpe 0.47，最大回撤 −12.7%，是机构级稳健配置首选。',
+    reng_pitch: '三产品中 Sharpe Ratio 最高（<strong>0.95</strong>），单位风险回报最优。XLE + AMLP 提供能源现金流，GLD 25% 担当通胀对冲与宏观对冲压舱石。TTM 价格回报 +49.5%（GLD 领涨驱动），最大回撤仅 −12.5%，攻守兼备，适合宏观视角的长期配置。',
+    rai_backtest: '回测期：Jan 2024 – Mar 2026（2.14年）· 税后累计总回报 +24.8% · 年化 +11.6%/yr · V19 统一 30% WHT',
+    rsi_backtest: '回测期：Feb 2023 – Mar 2026（3.13年）· 税后累计总回报 +28.1% · 年化 +9.0%/yr · V19 统一 30% WHT（USFR 0%）',
+    reng_backtest: '回测期：Feb 2023 – Mar 2026（3.13年）· 税后累计总回报 +65.6% · 年化 +21.0%/yr · V19 统一 30% WHT（GLD 0%）',
+    allocation: '配置比例',
+    capital: '本金',
+    total_eq: '总计 = ',
+    sum100: '三者合计 100%',
+    chart_toggle: '📈 过去12个月业绩走势图（TTM）',
+    chart_subtitle: 'Mar 25, 2025 → Mar 25, 2026 · 起始本金归一为 100 · 数据来源：xlsx v3 逐笔分红',
+    nav_legend: '本金金库（NAV）',
+    div_legend: '收益金库（累计派息）',
+    ttm_nav: 'TTM 本金变动',
+    ttm_div_pretax: 'TTM 累计派息（税前）',
+    aftertax_div: '税后派息（−30%）',
+    div_plus_price: '派息税后 + 价格',
+    monthly_toggle: '📅 每月派息明细（TTM 逐笔）',
+    ex_date: '除息日',
+    per_share: '每股$',
+    qqqi_yield: 'QQQI 派息率',
+    nvdy_yield: 'NVDY 派息率',
+    port_pretax_yield: '组合税前派息',
+    monthly_aftertax: '税后月均到手',
+    since2023: '近3年年化（2023起）',
+    port_yield: '组合派息',
+    port_total: '组合总回报',
+    wtd_price: '加权价格变动',
+    pretax_total: '税前总回报',
+    monthly_income: '税后月均派息',
+    per_month: '每月到手',
+    aftertax_total: '税后总回报',
+    disclaimer: '税后总回报 = 税后派息 + 价格变动。GLD 不派息。NVDY 派息约95%为资本返还，实际预扣税可能低于30%。TTM 派息率基于起始价格计算。',
+    datasrc_title: '数据来源备注：',
+    datasrc_body: 'rAI TTM：xlsx v3（20260326）· 逐笔验证 · QQQI 13笔 / NVDY 31笔 · 2025-03-25→2026-03-25<br>rAI 成立以来：同文件 · 统一基准 Jan 30,2024→Mar 25,2026（2.15年）· QQQI 26笔 / NVDY 45笔<br>rSI TTM：SPYI Yahoo Finance 截至 3/20/2026 · SCHD Yahoo Finance 截至 3/11/2026 · USFR stockanalysis.com<br>rSI 成立以来：SPYI Aug 2022起 · SCHD 2011起 · USFR Feb 2014起（各自成立日）<br>rENG TTM：XLE & AMLP Yahoo Finance 截至 3/23/2026 · GLD investing.com 截至 3/26/2026（TTM +48.44%）<br>rENG 成立以来：统一基准 Aug 25,2010→Mar 25,2026（约15.6年）· XLE 派息用 financecharts.com 10年均值<br>预扣税率：30%（新加坡居民持有美股默认税率）',
+    // dynamic calc labels
+    div_yield: '派息率', price_chg: '价格变动', total_ret: '总回报',
+    wtd_label: '加权', pretax_port: '税前组合派息', aftertax_port: '税后派息 (−30%)',
+    per_yr: '/年', col1_rai: 'QQQI TTM（13笔）', col2_rai: 'NVDY TTM（31笔）',
+    col3_si_u: 'USFR TTM（12笔）', col3_eng_g: 'GLD TTM（不派息）',
+    gld_no_div: 'GLD 不派息', total_row: '合计',
+    notes_rai_ttm: 'rAI TTM：xlsx v3（20260326）· 逐笔验证 · QQQI 13笔 / NVDY 31笔 · 2025-03-25→2026-03-25',
+    notes_rai_inc: 'rAI 成立以来：xlsx v3 · 统一基准 Jan 30,2024→Mar 25,2026（2.15年）',
+    notes_rsi_ttm: 'rSI TTM：xlsx v2（20260327）逐笔验证 · SPYI 13笔 / SCHD 5笔 / USFR 12笔 · 2025-03-25→2026-03-25',
+    notes_rsi_inc: 'rSI 近3年年化：共同基准 2023-02-01→2026-03-25（3.14年）· xlsx v2 全品种逐笔验证',
+    notes_reng_ttm: 'rENG TTM：xlsx v2（20260327）逐笔验证 · XLE 4笔 / AMLP 4笔 / GLD 0笔 · 2025-03-25→2026-03-25',
+    notes_reng_inc: 'rENG 近3年年化：共同基准 2023-02-01→2026-03-25（3.14年）· xlsx v2 全品种逐笔验证',
+  },
+  en: {
+    title: 'Portfolio Calculator',
+    subtitle: 'rAI/rSI/rENG data: 20260327_ETF_Historical_Data.xlsx (all tickers verified) · Includes TTM chart + distribution details',
+    rai_tagline: 'AI Max Yield',
+    rsi_tagline: 'Low-Vol High-Yield',
+    reng_tagline: 'Energy n Gold (Macro Hedge)',
+    weekly_dist: 'Weekly Distributions',
+    monthly_dist: 'Monthly Distributions',
+    quarterly_dist: 'Quarterly Distributions',
+    ann_vol: 'Ann. Volatility',
+    max_dd: 'Max Drawdown',
+    ttm_div_rate: 'TTM Net Yield (After-tax)',
+    ttm_total_ret: 'TTM Total Return (After-tax)',
+    target_investor: '🎯 Target Investor',
+    dist_freq: '📅 Distribution Frequency',
+    selling_pt: 'Pitch: ',
+    rai_investor: 'Aggressive · AI-Themed · High Monthly Income',
+    rsi_investor: 'Conservative · Family Office · Stable Monthly Cash Flow',
+    reng_investor: 'Macro Hedge · Inflation Protection',
+    reng_dist_detail: 'XLE + AMLP Quarterly; GLD — No Distribution',
+    sharpe_best: 'Rf = 4%, Highest',
+    rai_pitch: 'QQQI generates continuous option premium via Nasdaq-100 covered calls; NVDY amplifies returns through single-stock synthetic options on NVDA. Together they deliver multiple cash flows per week, with a TTM after-tax net yield of <strong>18.42%</strong> — ideal for investors seeking high monthly passive income.',
+    rsi_pitch: 'A three-layer structure: SPYI captures monthly S&P 500 option premium, SCHD contributes quality dividend income quarterly, and USFR provides floating-rate T-bill stability (PIE tax-exempt). At just <strong>10.7%</strong> volatility — the lowest of the three — with Sharpe 0.47 and max drawdown −12.7%, this is the institutional-grade conservative allocation.',
+    reng_pitch: 'Highest Sharpe Ratio among the three products (<strong>0.95</strong>), best risk-adjusted return. XLE + AMLP provide energy income; GLD at 25% serves as an inflation and macro hedge anchor. TTM price return +49.5% (GLD-led), max drawdown only −12.5% — offense and defense combined for long-horizon macro investors.',
+    rai_backtest: 'Backtest: Jan 2024 – Mar 2026 (2.14 yrs) · After-tax cumulative total return +24.8% · Ann. +11.6%/yr · V19 uniform 30% WHT',
+    rsi_backtest: 'Backtest: Feb 2023 – Mar 2026 (3.13 yrs) · After-tax cumulative total return +28.1% · Ann. +9.0%/yr · V19 uniform 30% WHT (USFR 0%)',
+    reng_backtest: 'Backtest: Feb 2023 – Mar 2026 (3.13 yrs) · After-tax cumulative total return +65.6% · Ann. +21.0%/yr · V19 uniform 30% WHT (GLD 0%)',
+    allocation: 'Allocation',
+    capital: 'Capital',
+    total_eq: 'Total = ',
+    sum100: 'Sum = 100%',
+    chart_toggle: '📈 12-Month Performance Chart (TTM)',
+    chart_subtitle: 'Mar 25, 2025 → Mar 25, 2026 · Base = 100 · Source: xlsx v3 per-distribution data',
+    nav_legend: 'NAV (Price)',
+    div_legend: 'Cumulative Distributions',
+    ttm_nav: 'TTM Price Change',
+    ttm_div_pretax: 'TTM Cum. Distributions (Pre-tax)',
+    aftertax_div: 'After-tax Distributions (−30%)',
+    div_plus_price: 'After-tax Div + Price',
+    monthly_toggle: '📅 Distribution Details (TTM per record)',
+    ex_date: 'Ex-Date',
+    per_share: 'Per Share $',
+    qqqi_yield: 'QQQI Yield',
+    nvdy_yield: 'NVDY Yield',
+    port_pretax_yield: 'Portfolio Pre-tax Yield',
+    monthly_aftertax: 'Monthly After-tax Est.',
+    since2023: '3-Yr Ann. (Since 2023)',
+    port_yield: 'Portfolio Yield',
+    port_total: 'Portfolio Total Return',
+    wtd_price: 'Wtd. Price Change',
+    pretax_total: 'Pre-tax Total Return',
+    monthly_income: 'Monthly After-tax Income',
+    per_month: 'Per month (est.)',
+    aftertax_total: 'After-tax Total Return',
+    disclaimer: 'After-tax Total Return = After-tax distributions + Price change. GLD pays no distributions. ~95% of NVDY distributions are return of capital; actual WHT may be below 30%. TTM yield is based on starting price.',
+    datasrc_title: 'Data Source Notes:',
+    datasrc_body: 'rAI TTM: xlsx v3 (20260326) · Verified per record · QQQI 13 records / NVDY 31 records · 2025-03-25→2026-03-25<br>rAI Since Inception: Same file · Unified baseline Jan 30,2024→Mar 25,2026 (2.15 yrs) · QQQI 26 / NVDY 45 records<br>rSI TTM: SPYI Yahoo Finance to 3/20/2026 · SCHD Yahoo Finance to 3/11/2026 · USFR stockanalysis.com<br>rSI Since Inception: SPYI from Aug 2022 · SCHD from 2011 · USFR from Feb 2014 (each fund\'s inception)<br>rENG TTM: XLE & AMLP Yahoo Finance to 3/23/2026 · GLD investing.com to 3/26/2026 (TTM +48.44%)<br>rENG Since Inception: Unified baseline Aug 25,2010→Mar 25,2026 (~15.6 yrs) · XLE distributions use 10-yr avg from financecharts.com<br>Withholding Tax: 30% (default rate for Singapore residents holding US equities)',
+    // dynamic calc labels
+    div_yield: 'Yield', price_chg: 'Price Change', total_ret: 'Total Return',
+    wtd_label: 'Wtd.', pretax_port: 'Portfolio Pre-tax Yield', aftertax_port: 'After-tax Yield (−30%)',
+    per_yr: '/yr', col1_rai: 'QQQI TTM (13 records)', col2_rai: 'NVDY TTM (31 records)',
+    col3_si_u: 'USFR TTM (12 records)', col3_eng_g: 'GLD TTM (No Distribution)',
+    gld_no_div: 'GLD pays no distributions', total_row: 'Total',
+    notes_rai_ttm: 'rAI TTM: xlsx v3 (20260326) · Verified · QQQI 13 / NVDY 31 records · 2025-03-25→2026-03-25',
+    notes_rai_inc: 'rAI Since Inception: xlsx v3 · Unified baseline Jan 30,2024→Mar 25,2026 (2.15 yrs)',
+    notes_rsi_ttm: 'rSI TTM: xlsx v2 (20260327) Verified · SPYI 13 / SCHD 5 / USFR 12 records · 2025-03-25→2026-03-25',
+    notes_rsi_inc: 'rSI 3-Yr Ann.: Common baseline 2023-02-01→2026-03-25 (3.14 yrs) · xlsx v2 all tickers verified',
+    notes_reng_ttm: 'rENG TTM: xlsx v2 (20260327) Verified · XLE 4 / AMLP 4 / GLD 0 records · 2025-03-25→2026-03-25',
+    notes_reng_inc: 'rENG 3-Yr Ann.: Common baseline 2023-02-01→2026-03-25 (3.14 yrs) · xlsx v2 all tickers verified',
+  }
+};
+
+function toggleLang() {
+  LANG = LANG === 'zh' ? 'en' : 'zh';
+  document.getElementById('lang-label').textContent = LANG === 'zh' ? 'EN' : '中';
+  applyLang();
+  calc();
+  if (chartOpen) { const w = getWeights(); renderChart(w[0], w[1], w[2] || 0); }
+  if (monthlyOpen) { const w = getWeights(); const cap = parseFloat(document.getElementById('capital-input').value) || 100000; renderMonthly(w[0], w[1], w[2] || 0, cap); }
+}
+
+function applyLang() {
+  const t = T[LANG];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // Update data mode button text
+  document.getElementById('dtab-inc').textContent = t.since2023;
+}
+
 document.getElementById('capital-input').addEventListener('input',calc);
 calc();
 </script>
