@@ -1,0 +1,460 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wp { max-width: 680px; font-family: var(--font-sans); margin: 0 auto; padding: 2rem 1rem; }
+
+.cover {
+  background: linear-gradient(135deg, #1a1208 0%, #2d1f0a 60%, #1a1208 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem 2.5rem 2.5rem;
+  position: relative; overflow: hidden; margin-bottom: 1rem;
+}
+.cover-grid {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(201,168,76,0.06) 0px, rgba(201,168,76,0.06) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, rgba(201,168,76,0.06) 0px, rgba(201,168,76,0.06) 1px, transparent 1px, transparent 40px);
+}
+.cover-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,168,76,0.15); border: 0.5px solid rgba(201,168,76,0.4); border-radius: 20px; padding: 4px 12px; font-size: 11px; color: #C9A84C; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; position: relative; }
+.cover-title { font-size: 48px; font-weight: 500; color: #F0D98A; line-height: 1.1; margin-bottom: 0.5rem; position: relative; }
+.cover-title span { color: #C9A84C; }
+.cover-sub { font-size: 16px; color: rgba(240,217,138,0.6); margin-bottom: 2rem; position: relative; line-height: 1.6; }
+.cover-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.2); border: 0.5px solid rgba(201,168,76,0.3); border-radius: var(--border-radius-md); overflow: hidden; position: relative; }
+.cstat { background: rgba(26,18,8,0.8); padding: 1rem; text-align: center; }
+.cstat-val { font-size: 22px; font-weight: 500; color: #C9A84C; display: block; }
+.cstat-label { font-size: 11px; color: rgba(240,217,138,0.5); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; display: block; }
+
+.section { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+.section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 0.75rem; }
+.section-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 1rem; }
+.body-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+
+.pipeline { display: flex; align-items: flex-start; gap: 0; margin: 1rem 0; overflow-x: auto; }
+.pipe-step { flex: 1; min-width: 78px; display: flex; flex-direction: column; align-items: center; }
+.pipe-box { width: 100%; padding: 8px 4px; text-align: center; border-radius: var(--border-radius-md); font-size: 11px; font-weight: 500; line-height: 1.4; }
+.pipe-box.usdc { background: #E6F1FB; color: #0C447C; border: 0.5px solid #378ADD; }
+.pipe-box.otc  { background: #F1EFE8; color: #444441; border: 0.5px solid #888780; }
+.pipe-box.gold { background: #FDF8EC; color: #8B6914; border: 0.5px solid #C9A84C; }
+.pipe-box.bank { background: #FAEEDA; color: #633806; border: 0.5px solid #EF9F27; }
+.pipe-box.inv  { background: #E1F5EE; color: #085041; border: 0.5px solid #1D9E75; }
+.pipe-box.dist { background: #E1F5EE; color: #085041; border: 0.5px solid #1D9E75; }
+.pipe-arrow { display: flex; align-items: center; padding: 0 3px; color: var(--color-text-tertiary); font-size: 13px; flex-shrink: 0; align-self: flex-start; margin-top: 12px; }
+.pipe-label { font-size: 10px; color: var(--color-text-tertiary); margin-top: 4px; text-align: center; line-height: 1.3; }
+.pipe-label.usd { color: #3B6D11; font-weight: 500; }
+
+.callout { border-left: 3px solid #C9A84C; background: #FDF8EC; padding: 0.875rem 1rem; margin: 0.75rem 0; font-size: 13px; color: #8B6914; line-height: 1.6; border-radius: 0; }
+.callout strong { color: #633806; }
+
+.flow { display: flex; flex-direction: column; margin: 0.5rem 0; }
+.flow-step { display: flex; align-items: flex-start; gap: 12px; }
+.flow-left { display: flex; flex-direction: column; align-items: center; width: 32px; flex-shrink: 0; }
+.flow-num { width: 28px; height: 28px; border-radius: 50%; background: #FDF8EC; border: 1.5px solid #C9A84C; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: #8B6914; }
+.flow-line { width: 1.5px; flex: 1; min-height: 24px; background: linear-gradient(180deg, #C9A84C 0%, rgba(201,168,76,0.15) 100%); margin: 4px 0; }
+.flow-content { flex: 1; padding-bottom: 1.25rem; }
+.flow-head { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+.flow-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.flow-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 500; }
+.tag-gold  { background: #FDF8EC; color: #8B6914; border: 0.5px solid #C9A84C; }
+.tag-teal  { background: #E1F5EE; color: #085041; }
+.tag-blue  { background: #E6F1FB; color: #0C447C; }
+.tag-amber { background: #FAEEDA; color: #633806; }
+.tag-green { background: #EAF3DE; color: #27500A; }
+
+.yield-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0.75rem 0; }
+.yield-table th { text-align: left; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.yield-table td { padding: 10px 8px; color: var(--color-text-primary); border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: middle; }
+.yield-table tr:last-child td { border-bottom: none; }
+.yield-table .total-row td { font-weight: 500; background: var(--color-background-secondary); border-top: 1.5px solid var(--color-border-secondary); }
+.num-pos { color: #0F6E56; font-weight: 500; }
+.num-neg { color: #993C1D; font-weight: 500; }
+.num-gold { color: #8B6914; font-weight: 500; }
+
+.alloc-bar { display: flex; height: 32px; border-radius: var(--border-radius-md); overflow: hidden; margin: 0.75rem 0; }
+.alloc-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; }
+.alloc-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+.legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0.75rem 0; }
+.scenario-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.875rem; background: var(--color-background-primary); }
+.sc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 8px; display: block; }
+.sc-label.bull { color: #0F6E56; }
+.sc-label.base { color: #8B6914; }
+.sc-label.bear { color: #993C1D; }
+.sc-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); padding: 3px 0; }
+.sc-row span:last-child { font-weight: 500; color: var(--color-text-primary); }
+.sc-total { margin-top: 8px; padding-top: 8px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 13px; font-weight: 500; display: flex; justify-content: space-between; }
+
+.pmr-formula { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.875rem 1rem; margin: 0.75rem 0; font-size: 13px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pmr-eq { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.pmr-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 500; background: #FDF8EC; color: #8B6914; border: 0.5px solid #C9A84C; }
+
+.threshold-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0.75rem 0; }
+.tcard { border-radius: var(--border-radius-md); padding: 0.875rem; text-align: center; }
+.tcard.safe { background: #E1F5EE; }
+.tcard.warn { background: #FAEEDA; }
+.tcard.liq  { background: #FCEBEB; }
+.tcard-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 4px; display: block; }
+.tcard.safe .tcard-label { color: #0F6E56; }
+.tcard.warn .tcard-label { color: #854F0B; }
+.tcard.liq  .tcard-label { color: #A32D2D; }
+.tcard-pmr { font-size: 20px; font-weight: 500; margin-bottom: 2px; display: block; }
+.tcard.safe .tcard-pmr { color: #085041; }
+.tcard.warn .tcard-pmr { color: #633806; }
+.tcard.liq  .tcard-pmr { color: #791F1F; }
+.tcard-val { font-size: 12px; display: block; }
+.tcard.safe .tcard-val { color: #085041; }
+.tcard.warn .tcard-val { color: #633806; }
+.tcard.liq  .tcard-val { color: #791F1F; }
+.tcard-drop { font-size: 13px; font-weight: 500; margin-top: 4px; display: block; }
+.tcard.safe .tcard-drop { color: #085041; }
+.tcard.warn .tcard-drop { color: #633806; }
+.tcard.liq  .tcard-drop { color: #791F1F; }
+
+.pmr-bar { position: relative; height: 40px; border-radius: var(--border-radius-md); overflow: hidden; display: flex; margin: 0.75rem 0 0; }
+.pmr-seg-safe { background: #1D9E75; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #04342C; }
+.pmr-seg-warn { background: #EF9F27; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #412402; }
+.pmr-seg-liq  { background: #E24B4A; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #501313; }
+
+.risk-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.risk-item:last-child { border-bottom: none; }
+.risk-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.risk-dot.high { background: #E24B4A; }
+.risk-dot.med  { background: #EF9F27; }
+.risk-dot.low  { background: #1D9E75; }
+.risk-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.risk-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.risk-mit  { font-size: 11px; color: #0F6E56; margin-top: 3px; }
+
+.param-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0.75rem 0; }
+.param-row { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem; display: flex; justify-content: space-between; align-items: center; }
+.param-key { font-size: 12px; color: var(--color-text-secondary); }
+.param-val { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+
+.entity-row { display: flex; gap: 8px; margin: 0.75rem 0; flex-wrap: wrap; }
+.entity-card { flex: 1; min-width: 120px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.875rem; }
+.entity-role { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); margin-bottom: 4px; }
+.entity-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.entity-desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; line-height: 1.4; }
+
+.footer { text-align: center; padding: 1.5rem; font-size: 11px; color: var(--color-text-tertiary); line-height: 1.7; border-top: 0.5px solid var(--color-border-tertiary); margin-top: 1rem; }
+</style>
+
+<div class="wp">
+
+  <div class="cover">
+    <div class="cover-grid"></div>
+    <div class="cover-badge"><i class="ti ti-coin" aria-hidden="true"></i> Product Whitepaper · v1.3 · May 2026</div>
+    <div class="cover-title">r<span>Gold</span></div>
+    <div class="cover-sub">存入稳定币，持有黄金敞口，<br>每月获得 Covered Call 期权金收益。</div>
+    <div class="cover-stats">
+      <div class="cstat"><span class="cstat-val">4–5%</span><span class="cstat-label">目标年化现金流</span></div>
+      <div class="cstat"><span class="cstat-val">60%</span><span class="cstat-label">黄金 LTV 上限</span></div>
+      <div class="cstat"><span class="cstat-val">月月</span><span class="cstat-label">链上派息频率</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">01 · Overview</div>
+    <div class="section-title">什么是 rGold？</div>
+    <p class="body-text">rGold 是 RWAlpha 协议发行的黄金收益代币。用户存入 USDC，协议通过持牌 OTC 商一次性兑换为 USD，全额买入香港实物黄金 ETF（3030.HK），用户获得等值 rGold Token 及完整黄金价格敞口。</p>
+    <div style="margin-top:0.75rem;" class="body-text">协议将持有的黄金 ETF 在投资银行处进行证券质押融资，按 60% LTV 借出 USD，直接配置至 Covered Call ETF（2802.HK）等收益资产，全程 USD 在传统金融轨道内流转。净收益每月通过 OTC 兑为 USDC 分配给 rGold 持有者。</div>
+    <div style="margin-top:0.75rem;" class="body-text">一笔存款，同时获得：黄金的保值属性 + 每年 4–5% 的稳定现金流。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 · Architecture</div>
+    <div class="section-title">完整资金流向</div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-box usdc">用户存入<br>USDC</div>
+        <div class="pipe-label">链上入金</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-box otc">持牌 OTC<br>（1次）</div>
+        <div class="pipe-label">USDC→USD</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-box gold">买入<br>3030.HK</div>
+        <div class="pipe-label usd">USD 直接买入</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-box bank">投资银行<br>质押融资</div>
+        <div class="pipe-label usd">借出 USD · 60%</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-box inv">直接配置<br>收益资产</div>
+        <div class="pipe-label usd">2802/SPYI/USFR</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-box dist">月度<br>派息</div>
+        <div class="pipe-label">OTC→USDC</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>OTC 只做两次：</strong>入金时 USDC→USD（一次），月度派息时净收益 USD→USDC（一次）。借款、配置、再投资全程在 USD 传统金融轨道内完成，无多余换汇摩擦。
+    </div>
+
+    <div class="flow" style="margin-top:1.25rem;">
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">1</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-head">用户存入 USDC → OTC → USD → 买入 3030.HK → mint rGold</div>
+          <div class="flow-desc">用户将 USDC 存入协议，协议通过持牌 OTC 商一次性兑换为 USD，全额买入 CSOP Gold ETF（3030.HK），向用户铸造等值 rGold Token，用户从此获得黄金 1:1 价格敞口。</div>
+          <span class="flow-tag tag-blue">$100 USDC → OTC → $100 USD → 买 3030.HK → mint 100 rGold</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">2</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-head">黄金 ETF 在投资银行处质押融资 → 借出 USD</div>
+          <div class="flow-desc">协议将 3030.HK 作为抵押品，在持牌投资银行办理证券质押融资，按 60% LTV 借出 USD，年化利率 4.7%。黄金 ETF 托管权不转移，全程合规可审计。</div>
+          <span class="flow-tag tag-amber">$100 黄金 ETF → 投资银行质押 → 借出 $60 USD @ 4.7%/年</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">3</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-head">USD 借款直接分层配置收益资产</div>
+          <div class="flow-desc">借出的 $60 USD 无需换汇，直接在传统金融轨道内配置：50% 买入 2802.HK（港股 Covered Call ETF），33% 配置 SPYI，17% 配置 USFR 美债作为保底层。三者均可以 USD 直接申购。</div>
+          <span class="flow-tag tag-green">$60 USD → 直接买入 2802 / SPYI / USFR（无二次 OTC）</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">4</div><div class="flow-line" style="opacity:0;"></div></div>
+        <div class="flow-content">
+          <div class="flow-head">月度 USD 收益结算 → OTC → USDC → 链上派息</div>
+          <div class="flow-desc">每月收益在 USD 轨道内结算，扣除投资银行借款利息及协议管理费，净收益通过 OTC 兑换为 USDC，链上自动分发至 rGold 持有者钱包。用户赎回时，协议还清银行借款、卖出 3030.HK，USD 兑 USDC 退还。</div>
+          <span class="flow-tag tag-teal">净收益 USD → OTC → USDC → 链上派息</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 · Key Entities</div>
+    <div class="section-title">核心参与机构</div>
+    <div class="entity-row">
+      <div class="entity-card">
+        <div class="entity-role">稳定币兑换</div>
+        <div class="entity-name">持牌 OTC 商</div>
+        <div class="entity-desc">USDC ↔ USD 合规双向兑换，满足 AML/KYC 要求</div>
+      </div>
+      <div class="entity-card">
+        <div class="entity-role">黄金 ETF 发行</div>
+        <div class="entity-name">CSOP（3030.HK）</div>
+        <div class="entity-desc">香港最大 ETF 发行商，初始 AUM ~$7.2 亿美元，实物黄金托管于港</div>
+      </div>
+      <div class="entity-card">
+        <div class="entity-role">质押融资方</div>
+        <div class="entity-name">投资银行</div>
+        <div class="entity-desc">证券质押借款，60% LTV，年化 4.7%，合规可审计</div>
+      </div>
+      <div class="entity-card">
+        <div class="entity-role">链上协议</div>
+        <div class="entity-name">RWAlpha Protocol</div>
+        <div class="entity-desc">BNB Chain 铸造 rGold，管理配置策略，链上自动派息</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 · Yield Model</div>
+    <div class="section-title">收益测算（基于 $100 USDC 存入）</div>
+
+    <div class="alloc-bar">
+      <div class="alloc-seg" style="width:50%; background:#C9A84C; color:#4A2C00;">2802.HK · 50%</div>
+      <div class="alloc-seg" style="width:33%; background:#1D9E75; color:#04342C;">SPYI · 33%</div>
+      <div class="alloc-seg" style="width:17%; background:#5DCAA5; color:#04342C;">USFR · 17%</div>
+    </div>
+    <div class="alloc-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#C9A84C;"></div>2802.HK — Covered Call ETF，期权金 ~15–18%</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div>SPYI — 中收益层，~12%</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5DCAA5;"></div>USFR 美债 — 保底层，~4.5%</div>
+    </div>
+
+    <table class="yield-table" style="margin-top:1rem;">
+      <thead>
+        <tr><th>收益 / 成本项</th><th>计算基础</th><th>保守</th><th>乐观</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2802 期权金派息</td><td>$30 USD × 15–18%</td><td class="num-pos">+$4.50</td><td class="num-pos">+$5.40</td></tr>
+        <tr><td>SPYI 收益</td><td>$20 USD × 12%</td><td class="num-pos">+$2.40</td><td class="num-pos">+$2.40</td></tr>
+        <tr><td>USFR 美债收益</td><td>$10 USD × 4.5%</td><td class="num-pos">+$0.45</td><td class="num-pos">+$0.45</td></tr>
+        <tr><td>投资银行借款利息</td><td>$60 USD × 4.7%</td><td class="num-neg">−$2.82</td><td class="num-neg">−$2.82</td></tr>
+        <tr><td>OTC 手续费（净收益换汇）</td><td>~0.1% × 净收益</td><td class="num-neg">−$0.04</td><td class="num-neg">−$0.05</td></tr>
+        <tr><td>协议管理费</td><td>净收益 × 10%</td><td class="num-neg">−$0.45</td><td class="num-neg">−$0.54</td></tr>
+        <tr class="total-row"><td colspan="2">用户净现金流（年）</td><td class="num-gold">$4.04</td><td class="num-gold">$4.84</td></tr>
+        <tr class="total-row"><td colspan="2">现金流收益率</td><td class="num-gold">4.04%</td><td class="num-gold">4.84%</td></tr>
+        <tr class="total-row"><td colspan="2">+ 黄金资本增值（浮动）</td><td colspan="2" style="text-align:center; color:#8B6914; font-weight:500;">100% 保留 · 与现金流叠加</td></tr>
+      </tbody>
+    </table>
+    <div class="body-text" style="margin-top:0.5rem;">Break-even：2802 年化收益仅需超过 7.83%（= 4.7% ÷ 60%）即可覆盖全部借款成本，当前实际派息 ~15–18%，安全边际充足。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">05 · Scenarios</div>
+    <div class="section-title">三种市场情景（$100 USDC 存入）</div>
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <span class="sc-label bull">牛市情景</span>
+        <div class="sc-row"><span>金价涨幅</span><span class="num-pos">+20%</span></div>
+        <div class="sc-row"><span>黄金增值</span><span class="num-pos">+$20</span></div>
+        <div class="sc-row"><span>净现金流</span><span class="num-pos">+$4.84</span></div>
+        <div class="sc-row"><span>PMR 变化</span><span>60%→50% ✓</span></div>
+        <div class="sc-total"><span>综合回报</span><span class="num-pos">+24.8%</span></div>
+      </div>
+      <div class="scenario-card" style="border-color:#C9A84C;">
+        <span class="sc-label base">基础情景</span>
+        <div class="sc-row"><span>金价涨幅</span><span>+5%</span></div>
+        <div class="sc-row"><span>黄金增值</span><span class="num-pos">+$5</span></div>
+        <div class="sc-row"><span>净现金流</span><span class="num-pos">+$4.44</span></div>
+        <div class="sc-row"><span>PMR 变化</span><span>稳定</span></div>
+        <div class="sc-total"><span>综合回报</span><span class="num-gold">+9.4%</span></div>
+      </div>
+      <div class="scenario-card">
+        <span class="sc-label bear">熊市情景</span>
+        <div class="sc-row"><span>金价跌幅</span><span class="num-neg">−15%</span></div>
+        <div class="sc-row"><span>黄金缩水</span><span class="num-neg">−$15</span></div>
+        <div class="sc-row"><span>净现金流</span><span class="num-pos">+$4.04</span></div>
+        <div class="sc-row"><span>PMR 变化</span><span>60%→70.6%</span></div>
+        <div class="sc-total"><span>综合回报</span><span class="num-neg">−11.0%</span></div>
+      </div>
+    </div>
+    <div class="body-text" style="margin-top:0.5rem;">现金流在三种情景下均为正；唯一亏损来源是金价下跌，与直接持有黄金 ETF 风险相同，但 rGold 额外提供 ~4% 现金流缓冲。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">06 · Risk Management</div>
+    <div class="section-title">风险管理机制</div>
+
+    <div class="pmr-formula">
+      <span>PMR 定义：</span>
+      <span class="pmr-eq">PMR = 贷款余额 ÷ 黄金抵押品市值</span>
+      <span class="pmr-tag">初始 PMR = 60%</span>
+    </div>
+
+    <div class="threshold-grid">
+      <div class="tcard safe">
+        <span class="tcard-label">安全区间</span>
+        <span class="tcard-pmr">PMR &lt; 80%</span>
+        <span class="tcard-val">黄金市值 &gt; $75</span>
+        <span class="tcard-drop">金价跌幅 &lt; 25%</span>
+      </div>
+      <div class="tcard warn">
+        <span class="tcard-label">追保预警</span>
+        <span class="tcard-pmr">PMR = 80%</span>
+        <span class="tcard-val">黄金市值 = $75</span>
+        <span class="tcard-drop">金价下跌 25%</span>
+      </div>
+      <div class="tcard liq">
+        <span class="tcard-label">强制平仓</span>
+        <span class="tcard-pmr">PMR = 90%</span>
+        <span class="tcard-val">黄金市值 = $66.7</span>
+        <span class="tcard-drop">金价下跌 33%</span>
+      </div>
+    </div>
+
+    <div class="pmr-bar">
+      <div class="pmr-seg-safe" style="width:66.7%;">安全区（PMR 0–80%）</div>
+      <div class="pmr-seg-warn" style="width:11.1%;">预警</div>
+      <div class="pmr-seg-liq"  style="width:22.2%;">平仓风险</div>
+    </div>
+    <div style="position:relative; height:18px; margin-top:4px; font-size:11px; color:var(--color-text-tertiary);">
+      <span style="position:absolute; left:0;">0%</span>
+      <span style="position:absolute; left:60%; transform:translateX(-50%); color:#8B6914; font-weight:500;">60%初始</span>
+      <span style="position:absolute; left:80%; transform:translateX(-50%); color:#854F0B; font-weight:500;">80%预警</span>
+      <span style="position:absolute; left:90%; transform:translateX(-50%); color:#A32D2D; font-weight:500;">90%平仓</span>
+    </div>
+
+    <div style="margin-top:1rem;">
+      <div class="risk-item">
+        <div class="risk-dot high"></div>
+        <div>
+          <div class="risk-name">金价下跌 >25% → 投资银行追加保证金（Margin Call）</div>
+          <div class="risk-desc">PMR 突破 80% 时银行发出追保通知；金价需跌逾 33% 才触发强制平仓。黄金历史最大单年跌幅约 28%（2013年），极端但未至平仓线。</div>
+          <div class="risk-mit">→ 协议在 PMR=75% 时提前预警；保留 5% 缓冲储备金；黄金历史波动率显著低于股票</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-dot med"></div>
+        <div>
+          <div class="risk-name">2802 NAV 大幅下跌</div>
+          <div class="risk-desc">港股崩盘导致 2802 净值大幅下跌，投资端本金损失。但黄金与港股天然负相关，两者同时大跌概率极低。</div>
+          <div class="risk-mit">→ 2802 配置上限 50%；止损线 −15% 自动卖出还款；SPYI+USFR 保底层可覆盖全部借款利息</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-dot med"></div>
+        <div>
+          <div class="risk-name">OTC / 投资银行对手方风险</div>
+          <div class="risk-desc">持牌 OTC 商或投资银行出现违约、操作失误或流动性问题。</div>
+          <div class="risk-mit">→ 仅使用持牌受监管机构；分散对手方；黄金 ETF 在独立托管账户隔离</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-dot low"></div>
+        <div>
+          <div class="risk-name">智能合约风险</div>
+          <div class="risk-desc">链上协议合约存在潜在漏洞或攻击风险。</div>
+          <div class="risk-mit">→ 上线前第三方审计；Merkle Root 链上透明验证；多签治理</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">07 · Parameters</div>
+    <div class="section-title">核心协议参数</div>
+    <div class="param-grid">
+      <div class="param-row"><span class="param-key">用户存入资产</span><span class="param-val">USDC</span></div>
+      <div class="param-row"><span class="param-key">OTC 兑换</span><span class="param-val">USDC→USD（持牌机构）</span></div>
+      <div class="param-row"><span class="param-key">协议买入标的</span><span class="param-val">3030.HK（实物黄金 ETF）</span></div>
+      <div class="param-row"><span class="param-key">质押融资方</span><span class="param-val">投资银行（传统金融）</span></div>
+      <div class="param-row"><span class="param-key">抵押借款 LTV</span><span class="param-val">60%（借出 USD）</span></div>
+      <div class="param-row"><span class="param-key">借款年利率</span><span class="param-val">4.7%</span></div>
+      <div class="param-row"><span class="param-key">追保预警线</span><span class="param-val">PMR = 80%（跌 25%）</span></div>
+      <div class="param-row"><span class="param-key">强制平仓线</span><span class="param-val">PMR = 90%（跌 33%）</span></div>
+      <div class="param-row"><span class="param-key">2802 配置上限</span><span class="param-val">借款额的 50%</span></div>
+      <div class="param-row"><span class="param-key">派息频率</span><span class="param-val">每月（链上 USDC）</span></div>
+      <div class="param-row"><span class="param-key">协议管理费</span><span class="param-val">净收益的 10%</span></div>
+      <div class="param-row"><span class="param-key">发行链</span><span class="param-val">BNB Smart Chain</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">08 · Competitive Edge</div>
+    <div class="section-title">为什么选择 rGold？</div>
+    <table class="yield-table">
+      <thead>
+        <tr><th>产品</th><th>黄金敞口</th><th>额外收益</th><th>门槛</th><th>链上化</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>直接存 USDC（稳定币理财）</td><td class="num-neg">✗</td><td>4–5%</td><td>低</td><td>部分</td></tr>
+        <tr><td>买入 3030.HK（持有）</td><td class="num-pos">✓ 100%</td><td class="num-neg">0%</td><td>低</td><td>✗</td></tr>
+        <tr><td>传统黄金抵押借贷</td><td class="num-pos">✓</td><td>自行操作</td><td>高</td><td>✗</td></tr>
+        <tr style="background:#FDF8EC;">
+          <td><strong>rGold（本协议）</strong></td>
+          <td class="num-gold">✓ 100%</td>
+          <td class="num-gold">+4–5%</td>
+          <td class="num-gold">低（存 U 即可）</td>
+          <td class="num-gold">✓ BNB Chain</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div style="font-weight:500; color:var(--color-text-secondary); margin-bottom:6px;">RWAlpha Protocol · rGold Whitepaper v1.3 · May 2026</div>
+    本白皮书仅供参考，不构成投资建议。投资涉及风险，过往表现不代表未来回报。<br>
+    rGold 协议尚在开发阶段，实际参数可能在正式发布前调整。<br>
+    © 2026 DMZ Finance · RWAlpha.ai
+  </div>
+
+</div>
